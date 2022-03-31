@@ -12,7 +12,7 @@ projectBtn.addEventListener("click", projectClick);
 aboutBtn.addEventListener("click", aboutClick);
 
 function logoClick(){
-    location.href="/blog/index.html";
+    location.href="/index.html";
 }
 function homeClick(){
     var curUrl = location.href;
@@ -32,23 +32,23 @@ function homeClick(){
     selMenu = params.get("page");
     switch(selMenu){
         case "study":
-            location.href="/blog/public/page/main.html?page=study";
+            location.href="/public/page/main.html?page=study";
             break;
         case "project":
-            location.href="/blog/public/page/main.html?page=project";
+            location.href="/public/page/main.html?page=project";
             break;
         case "about":
-            location.href="/blog/public/page/main.html?page=about";
+            location.href="/public/page/main.html?page=about";
             break;
     }
 }
 function studylick(){
-    location.href="/blog/public/page/main.html?page=study";
+    location.href="/public/page/main.html?page=study";
 }
 function projectClick(){
-    location.href="/blog/public/page/main.html?page=project";
+    location.href="/public/page/main.html?page=project";
 }
 function aboutClick(){
-    location.href="/blog/public/page/main.html?page=about";
+    location.href="/public/page/main.html?page=about";
 }
 
