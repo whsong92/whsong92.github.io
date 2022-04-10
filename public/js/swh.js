@@ -50,6 +50,8 @@ var swhLib = (function(){
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if(this.readyState == 4 && this.status == 200) {
+                console.log(this.status);
+                console.log(this);
                 target.innerHTML  = this.responseText;
                 var script_list = target.querySelectorAll("script");
                 console.log(script_list);
