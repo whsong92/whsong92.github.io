@@ -7,12 +7,12 @@ const aboutBtn = document.querySelector(".navi-about");
 
 logoBtn.addEventListener("click", logoClick);
 homeBtn.addEventListener("click", homeClick);
-studyBtn.addEventListener("click", studylick);
+studyBtn.addEventListener("click", studyClick);
 projectBtn.addEventListener("click", projectClick);
 aboutBtn.addEventListener("click", aboutClick);
 
 function logoClick(){
-    location.href="/index.html";
+    location.href="../../index.html";
 }
 function homeClick(){
     var curUrl = location.href;
@@ -32,23 +32,23 @@ function homeClick(){
     selMenu = params.get("page");
     switch(selMenu){
         case "study":
-            location.href="/public/page/main.html?page=study";
+            studyClick();
             break;
         case "project":
-            location.href="/public/page/main.html?page=project";
+            projectClick();
             break;
         case "about":
-            location.href="/public/page/main.html?page=about";
+            aboutClick();
             break;
     }
 }
-function studylick(){
-    location.href="/public/page/main.html?page=study";
+function studyClick(){
+    swh.loadPage("study");
 }
 function projectClick(){
-    location.href="/public/page/main.html?page=project";
+    swh.loadPage("project");
 }
 function aboutClick(){
-    location.href="/public/page/main.html?page=about";
+    swh.loadPage("about");
 }
 

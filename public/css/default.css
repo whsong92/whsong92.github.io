@@ -16,18 +16,6 @@ body{
     user-select:none
 }
 
-.left-menu{
-    position: fixed;
-    top: 72px;
-    left: 0;
-    height: 100vh;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-    border-width: 10px;
-    border-style: dotted;
-    border-color:red;
-}
-
 body::-webkit-scrollbar {
     display: none;
 }

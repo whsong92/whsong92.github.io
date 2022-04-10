@@ -8,12 +8,10 @@ function addEvent(){
     const rBtn = document.querySelector(".right-btn");
 
     lBtn.addEventListener("click", function(){
-        //location.href="./public/page/study.html";
-        location.href="./public/page/main.html?page=study";
+        location.href="./public/pages/main.html?page=study";
     });
 
     rBtn.addEventListener("click", function(){
-        //location.href="./public/page/project.html";
-        location.href="./public/page/main.html?page=project";
+        location.href="./public/pages/main.html?page=project";
     });
 }
