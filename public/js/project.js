@@ -9,7 +9,7 @@ function goProject(){
         return;
     }
 
-    loadContent('project_dtl.html');
+    swh.loadContent('project_dtl.html');
 
     var projectNo = this.getAttribute("project-no");
     switch(projectNo){

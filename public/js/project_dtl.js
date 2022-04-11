@@ -24,11 +24,11 @@ const changeSlide = (direction) => {
 //downButton.addEventListener("click", () => changeSlide("down"));
 
 slideLeft.addEventListener("wheel", (e) => {
-  changeSlide(e.deltaY > 0 ? "up": "down");
+  changeSlide(e.deltaY > 50 ? "up": e.deltaY < -50 ? "down" : "");
 });
 
 slideRight.addEventListener("wheel", (e) => {
-  changeSlide(e.deltaY > 0 ? "up": "down");
+  changeSlide(e.deltaY > 50 ? "up": e.deltaY < -50 ? "down" : "");
 });
 
 

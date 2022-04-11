@@ -4,7 +4,7 @@ const fixNav = () => {
     nav.addEventListener("click", function(){
         
     });
-    if (window.scrollY > nav.offsetHeight + 150) nav.classList.add("active");
+    if (window.scrollY > nav.offsetHeight) nav.classList.add("active");
     else nav.classList.remove("active");
 };
 
