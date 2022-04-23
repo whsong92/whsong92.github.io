@@ -1,3 +1,31 @@
-.study{
-    height:10000px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
+body {
+    font-family: "Open Sans", sans-serif;
+    height: 100vh;
+  }
+
+.study-container{
+    background-color: darkslateblue;
+    height: 100%;
+    width:100%;
+    margin: 0;
+    padding: 0;
+}
+
+.left-menu{
+    height:100%;
+    min-width:45px;
+
+}
+
+.study-content{
+    height:100%;
+    width:100%;
+    background-color: red;
+}
+  
