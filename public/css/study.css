@@ -1,15 +1,12 @@
-body {
-    font-family: "Open Sans", sans-serif;
-    height: 100vh;
-    width:100%;
-    background-color: rgba(248, 114, 125, 0.829);
-  }
+
 
 .study-container{
     height: 100%;
     width:100%;
     margin: 0;
     padding: 0;
+    padding-bottom:100px;
+    margin-bottom:100px;
 }
 
 .study-left-menu{
@@ -23,7 +20,8 @@ body {
 .study-content{
     margin-left:200px;
     width:100%;
-    height:100vh;
+    height: 100%;
     background-color:white;
     overflow-y:scroll;
+    
 }

@@ -12,6 +12,9 @@
   right: 0;
   transition: all 0.3s ease-in-out;
   z-index:999999999;
+  border-color:rgba(248, 114, 125, 0.829);
+  border-width: 0 0 2px 0px;
+  border-style: inset;
 }
 
 .container {

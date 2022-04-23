@@ -1,23 +1,36 @@
 .study-content-container{
+    display:block;
     width:90%;
     height:100%;
     padding:55px;
-    background-color:white
+    padding-bottom:40px; 
+}
+.study-content-container::after{
+    display:block;
+    content:''; 
 }
 
-.study-lists{
-    display:inline;
-}
 
 
 .list {
     float:left;
-    width:250px;
-    height:250px;
+    width:225px;
+    height:225px;
     margin-right:35px;
-    margin-bottom:60px;
+    margin-bottom:45px;
     background-color:#f8f6fb;
     border-radius: 18px;
-    box-shadow:5px 5px 5px rgba(187, 184, 184, 0.6);
+    box-shadow:5px 8px 5px rgba(187, 184, 184, 0.6);
+}
 
+.list img{
+    padding:30px;
+    width:100%;
+    height:100%;
+    filter: grayscale(100%);
+    
+}
+
+.list img:hover{
+    filter: grayscale(0%);
 }
