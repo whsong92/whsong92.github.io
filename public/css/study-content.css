@@ -1,7 +1,7 @@
 .study-content-container{
     width:90%;
     height:100%;
-    padding:30px;
+    padding:55px;
     background-color:white
 }
 
@@ -14,7 +14,10 @@
     float:left;
     width:250px;
     height:250px;
-    margin-right:30px;
-    margin-bottom:30px;
-    background-color:rgb(221, 230, 196);
+    margin-right:35px;
+    margin-bottom:60px;
+    background-color:#f8f6fb;
+    border-radius: 18px;
+    box-shadow:5px 5px 5px rgba(187, 184, 184, 0.6);
+
 }
