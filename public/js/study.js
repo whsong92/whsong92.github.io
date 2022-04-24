@@ -2,11 +2,11 @@ var studyLib = (function(){
     var selMenuIdx;
     var env = ['linux', 'wsl', 'docker', 'vscode', 'git', 'graalvm', 'jenkins'];
     var lang = ['java', 'javascript', 'html', 'css', 'python', 'clojure', 'rust'];
-    var frame = ['browser', 'reactjs', 'vuejs', 'svelte', 'electronjs', 'nodejs', 'spring', 'django', 'luminus'];
+    var frame = ['browser', 'reactjs', 'vuejs', 'svelte', 'electronjs', 'nodejs', 'spring', 'django', 'luminus','unreal'];
     var api = ['graphql', 'grpc'];
     var db = ['redis', 'mongodb', 'oracle', 'neo4j'];
     var theory = ['automata', 'compiler', 'blockchain', 'ipfs', 'deeplearning', 'os'];
-    var etc = ['unreal'];
+    var etc = [];
     var all = [].concat(env).concat(lang).concat(frame).concat(api).concat(db).concat(etc).concat(theory);
     function getAll(){return all;}
     function getEnv(){return env;}

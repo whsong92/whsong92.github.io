@@ -1,29 +1,29 @@
 .study-content-container{
-    --env-color:blue;
-    --lang-color:red;
-    --frame-color:blue;
-    --api-color:blue;
-    --db-color:blue;
-    --theory-color:blue;
-    --etc-color:blue;
+    --env-color:rgba(76, 112, 230, 0.459);
+    --lang-color:rgba(223, 43, 58, 0.459);
+    --frame-color:rgba(87, 187, 30, 0.548);
+    --api-color:rgba(237, 172, 177, 0.38);
+    --db-color:rgba(106, 112, 117, 0.459);
+    --theory-color:rgba(138, 138, 224, 0.486);
+    --etc-color:rgb(123, 62, 221);
     
-    --env-hover-color:rgba(237, 172, 177, 0.6);
-    --lang-hover-color:rgba(237, 172, 177, 0.6);
-    --frame-hover-color:rgba(237, 172, 177, 0.6);
+    --env-hover-color:rgba(76, 112, 206, 0.6);
+    --lang-hover-color:rgba(230, 43, 58, 0.6);
+    --frame-hover-color:rgba(87, 187, 30, 0.6);
     --api-hover-color:rgba(237, 172, 177, 0.6);
-    --db-hover-color:rgba(237, 172, 177, 0.6);
-    --theory-hover-color:rgba(237, 172, 177, 0.6);
-    --etc-hover-color:rgba(237, 172, 177, 0.6);
-
+    --db-hover-color:rgba(106, 112, 117, 0.6);
+    --theory-hover-color:rgba(138, 138, 224, 0.6);
+    --etc-hover-color:rgb(123, 62, 221, 0.6);
 
 }
 
 .study-content-container{
     display:block;
-    width:90%;
+    width:100%;
     height:100%;
     padding:55px;
-    padding-bottom:40px; 
+    padding-bottom:40px;
+    overflow-x:hidden;
 }
 .study-content-container::after{
     display:block;
@@ -40,25 +40,26 @@
     margin-bottom:45px;
     background-color:#f8f6fb;
     border-radius: 18px;
-    box-shadow:5px 8px 5px rgba(187, 184, 184, 0.6);
+    box-shadow:5px 8px 7px rgba(187, 184, 184, 0.6);
+    transition: box-shadow 400ms ease-in-out
 }
 
-.list.env:hover{  box-shadow:5px 8px 5px var(--env-hover-color); }
-.list.lang:hover{  box-shadow:5px 8px 5px var(--lang-hover-color); }
-.list.frame:hover{  box-shadow:5px 8px 5px var(--frame-hover-color); }
-.list.api:hover{  box-shadow:5px 8px 5px var(--api-hover-color); }
-.list.db:hover{  box-shadow:5px 8px 5px var(--db-hover-color); }
-.list.theory:hover{  box-shadow:5px 8px 5px var(--theory-hover-color); }
-.list.etc:hover{  box-shadow:5px 8px 5px var(--etc-hover-color); }
+.list.env:hover{  box-shadow:5px 12px 7px var(--env-hover-color); }
+.list.lang:hover{  box-shadow:5px 12px 7px var(--lang-hover-color); }
+.list.frame:hover{  box-shadow:5px 12px 7px var(--frame-hover-color); }
+.list.api:hover{  box-shadow:5px 12px 7px var(--api-hover-color); }
+.list.db:hover{  box-shadow:5px 12px 7px var(--db-hover-color); }
+.list.theory:hover{  box-shadow:5px 12px 7px var(--theory-hover-color); }
+.list.etc:hover{  box-shadow:5px 12px 7px var(--etc-hover-color); }
 
 
-.list.env .kind-color{ margin-left: 28px; width:11px; height:20px; background-color:var(--env-color) }
-.list.lang .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--lang-color) }
-.list.frame .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--frame-color) }
-.list.api .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--api-color) }
-.list.db .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--db-color) }
-.list.theory .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--theory-color) }
-.list.etc .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--etc-color) }
+.list.env .kind-color{ margin-left: 28px; width:50px; height:22px; background-color:var(--env-color) }
+.list.lang .kind-color{  margin-left: 28px; width:50px; height:22px; background-color:var(--lang-color) }
+.list.frame .kind-color{  margin-left: 28px; width:50px; height:22px; background-color:var(--frame-color) }
+.list.api .kind-color{  margin-left: 28px; width:50px; height:22px; background-color:var(--api-color) }
+.list.db .kind-color{  margin-left: 28px; width:50px; height:22px; background-color:var(--db-color) }
+.list.theory .kind-color{  margin-left: 28px; width:50px; height:22px; background-color:var(--theory-color) }
+.list.etc .kind-color{  margin-left: 28px; width:50px; height:22px; background-color:var(--etc-color) }
 
 .list img{
     padding:30px;
