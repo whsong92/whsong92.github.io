@@ -1,4 +1,24 @@
 .study-content-container{
+    --env-color:blue;
+    --lang-color:red;
+    --frame-color:blue;
+    --api-color:blue;
+    --db-color:blue;
+    --theory-color:blue;
+    --etc-color:blue;
+    
+    --env-hover-color:rgba(237, 172, 177, 0.6);
+    --lang-hover-color:rgba(237, 172, 177, 0.6);
+    --frame-hover-color:rgba(237, 172, 177, 0.6);
+    --api-hover-color:rgba(237, 172, 177, 0.6);
+    --db-hover-color:rgba(237, 172, 177, 0.6);
+    --theory-hover-color:rgba(237, 172, 177, 0.6);
+    --etc-hover-color:rgba(237, 172, 177, 0.6);
+
+
+}
+
+.study-content-container{
     display:block;
     width:90%;
     height:100%;
@@ -23,14 +43,30 @@
     box-shadow:5px 8px 5px rgba(187, 184, 184, 0.6);
 }
 
+.list.env:hover{  box-shadow:5px 8px 5px var(--env-hover-color); }
+.list.lang:hover{  box-shadow:5px 8px 5px var(--lang-hover-color); }
+.list.frame:hover{  box-shadow:5px 8px 5px var(--frame-hover-color); }
+.list.api:hover{  box-shadow:5px 8px 5px var(--api-hover-color); }
+.list.db:hover{  box-shadow:5px 8px 5px var(--db-hover-color); }
+.list.theory:hover{  box-shadow:5px 8px 5px var(--theory-hover-color); }
+.list.etc:hover{  box-shadow:5px 8px 5px var(--etc-hover-color); }
+
+
+.list.env .kind-color{ margin-left: 28px; width:11px; height:20px; background-color:var(--env-color) }
+.list.lang .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--lang-color) }
+.list.frame .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--frame-color) }
+.list.api .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--api-color) }
+.list.db .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--db-color) }
+.list.theory .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--theory-color) }
+.list.etc .kind-color{  margin-left: 28px; width:11px; height:20px; background-color:var(--etc-color) }
+
 .list img{
     padding:30px;
     width:100%;
     height:100%;
-    filter: grayscale(100%);
-    
+    filter: grayscale(89%);    
 }
 
 .list img:hover{
-    filter: grayscale(0%);
+    filter: grayscale(7.5%);
 }

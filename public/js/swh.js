@@ -28,11 +28,11 @@ var swhLib = (function(){
 
 
 
-    function loadComponent(target, component){
+    function loadComponent(target, component, callback){
         var prefix = "./component/";
         var fullUrl = prefix + component;
         var targets = document.querySelector(target);
-        loadHtml(targets, fullUrl);
+        loadHtml(targets, fullUrl, callback);
     }
 
     function loadContent(content_url){
@@ -41,23 +41,40 @@ var swhLib = (function(){
         var target = document.querySelector(".content-div");
         loadHtml(target, fullUrl);
     }
- 
-    function getMainPage(){
-        return loadedPage["mainPage"];
+
+
+    function loadContentsHtml(url, callback){
+        var prefix = "./contents/study/";
+        var fullUrl = prefix + url;
+
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+         
+            if(this.readyState == 4 && this.status == 200) {
+                var response = this.responseText;
+                callback(response);
+            }
+            
+        }
+        xhttp.open("GET", fullUrl, true);
+        xhttp.send();
     }
 
-    function loadHtml(target, url){
+
+ 
+    
+    function loadHtml(target, url, callback = null){
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if(this.readyState == 4 && this.status == 200) {
                 console.log(this.status);
                 console.log(this);
                 target.innerHTML  = this.responseText;
-                var script_list = target.querySelectorAll("script");
-                console.log(script_list);
-                for(var i=0; i < script_list.length; i++){
-                    if(script_list[i].src){
-                        loadScript(script_list[i].src);
+                var scriptList = target.querySelectorAll("script");
+                console.log(scriptList);
+                for(var i=0; i < scriptList.length; i++){
+                    if(scriptList[i].src){
+                        loadScript(scriptList[i].src, callback);
                     }
                 }
             }
@@ -73,14 +90,21 @@ var swhLib = (function(){
 
         if(callback){
             script.onreadystatechange = callback;
-            script.onload = callback;
+            script.onload = (function(){
+                callback();
+            });
+            
         }
 
         // Fire the loading
         document.body.appendChild(script);
     }
+
+    function getMainPage(){
+        return loadedPage["mainPage"];
+    }
     
-    return {loadPage, loadPages, loadComponent, loadContent, getMainPage};
+    return {loadPage, loadPages, loadComponent, loadContent, loadContentsHtml, getMainPage};
 });
 var swh = new swhLib();
 
