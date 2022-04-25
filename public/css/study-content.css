@@ -25,11 +25,13 @@
     padding-bottom:40px;
     overflow-x:hidden;
 }
-.study-content-container::after{
-    display:block;
-    content:''; 
-}
 
+
+.study-content::after{
+    display:block;
+    content:'';
+    clear:both;
+}
 
 
 .list {
@@ -62,12 +64,23 @@
 .list.etc .kind-color{  margin-left: 28px; width:50px; height:22px; background-color:var(--etc-color) }
 
 .list img{
-    padding:30px;
+    padding:45px;
+    padding-top:5px;
     width:100%;
     height:100%;
     filter: grayscale(89%);    
 }
 
 .list img:hover{
-    filter: grayscale(7.5%);
+    filter: grayscale(4%);
 }
+
+.contents-detail{
+    display:none;
+    position:fixed;
+    height:290px;
+    width:35%;
+    background-color:gray;
+    z-index:9999;
+}
+

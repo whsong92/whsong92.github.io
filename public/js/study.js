@@ -1,5 +1,6 @@
 var studyLib = (function(){
     var selMenuIdx;
+    var selStudyList = [];
     var env = ['linux', 'wsl', 'docker', 'vscode', 'git', 'graalvm', 'jenkins'];
     var lang = ['java', 'javascript', 'html', 'css', 'python', 'clojure', 'rust'];
     var frame = ['browser', 'reactjs', 'vuejs', 'svelte', 'electronjs', 'nodejs', 'spring', 'django', 'luminus','unreal'];
@@ -16,7 +17,8 @@ var studyLib = (function(){
     function getDb(){return db;}
     function getTheory(){return theory;}
     function getEtc(){return etc;}
-    
+    function getStudyList(){return selStudyList;}
+
     function setMenu(idx = 0){
         console.log("idx : " + idx);
         if(selMenuIdx != idx){
@@ -53,6 +55,7 @@ var studyLib = (function(){
                 }
 
                 var requestList = [...list];
+                selStudyList = [...list];
                 studyContent.studyContentsLoad(requestList);
             }
         }
@@ -65,7 +68,7 @@ var studyLib = (function(){
     }
     
 
-    return {init, getAll, getEnv, getLang, getFrame, getApi, getDb, getTheory, getEtc, setMenu}
+    return {init, getAll, getEnv, getLang, getFrame, getApi, getDb, getTheory, getEtc, getStudyList, setMenu}
 
 
 });
