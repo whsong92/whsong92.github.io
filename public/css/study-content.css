@@ -5,7 +5,7 @@
     --api-color:rgba(237, 172, 177, 0.38);
     --db-color:rgba(106, 112, 117, 0.459);
     --theory-color:rgba(138, 138, 224, 0.486);
-    --etc-color:rgb(123, 62, 221);
+    --etc-color:rgba(255, 255, 255, 0.87);
     
     --env-hover-color:rgba(76, 112, 206, 0.6);
     --lang-hover-color:rgba(230, 43, 58, 0.6);
@@ -13,7 +13,7 @@
     --api-hover-color:rgba(237, 172, 177, 0.6);
     --db-hover-color:rgba(106, 112, 117, 0.6);
     --theory-hover-color:rgba(138, 138, 224, 0.6);
-    --etc-hover-color:rgb(123, 62, 221, 0.6);
+    --etc-hover-color:rgba(44, 43, 43, 0.884);
 
 }
 
@@ -44,6 +44,11 @@
     border-radius: 18px;
     box-shadow:5px 8px 7px rgba(187, 184, 184, 0.6);
     transition: box-shadow 400ms ease-in-out
+}
+
+.list.etc {
+    background-color:#5f5e61;
+    
 }
 
 .list.env:hover{  box-shadow:5px 12px 7px var(--env-hover-color); }
@@ -80,7 +85,7 @@
     position:fixed;
     height:290px;
     width:35%;
-    background-color:gray;
+    background-color:rgb(230, 222, 222);
     z-index:9999;
 }
 

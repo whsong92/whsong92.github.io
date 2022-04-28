@@ -6,6 +6,9 @@ var studyContentLib = (function(){
     function contentClick(target, idx){
         console.log(target);
         console.log(idx);
+
+        var stdList = study.getStudyList();
+        //alert(stdList[idx]);
     }
 
     function contentHover(target, idx){

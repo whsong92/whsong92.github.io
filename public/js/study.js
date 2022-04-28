@@ -2,13 +2,13 @@ var studyLib = (function(){
     var selMenuIdx;
     var selStudyList = [];
     var env = ['linux', 'wsl', 'docker', 'vscode', 'git', 'graalvm', 'jenkins'];
-    var lang = ['java', 'javascript', 'html', 'css', 'python', 'clojure', 'rust'];
+    var lang = ['language', 'html', 'css', 'javascript', 'python', 'java', 'clojure', 'rust'];
     var frame = ['browser', 'reactjs', 'vuejs', 'svelte', 'electronjs', 'nodejs', 'spring', 'django', 'luminus','unreal'];
     var api = ['graphql', 'grpc'];
     var db = ['redis', 'mongodb', 'oracle', 'neo4j'];
-    var theory = ['automata', 'compiler', 'blockchain', 'ipfs', 'deeplearning', 'os'];
-    var etc = [];
-    var all = [].concat(env).concat(lang).concat(frame).concat(api).concat(db).concat(etc).concat(theory);
+    var theory = ['automata', 'compiler', 'blockchain', 'ipfs', 'deeplearning', 'os_kernel'];
+    var etc = ['photoshop', 'cakewalk', 'blender', 'economic'];
+    var all = [].concat(env).concat(lang).concat(frame).concat(api).concat(db).concat(theory).concat(etc);
     function getAll(){return all;}
     function getEnv(){return env;}
     function getLang(){return lang;}
