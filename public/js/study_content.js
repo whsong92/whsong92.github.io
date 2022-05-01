@@ -1,7 +1,11 @@
 var studyContentLib = (function(){
     var filepath = "./contents/study";
 
-
+    var time = 0;
+    setInterval(function(){
+        time++;
+        console.log(time);
+    }, 1000);
 
     function contentClick(target, idx){
         console.log(target);
@@ -46,11 +50,11 @@ var studyContentLib = (function(){
                 }else{
                     detail.style.top =  top - 300 + "px";
                 }
-                
-                
-                detail.style.display = "block";
+                //detail.style.display = "block";
+                detail.classList.add("active");
             }else{
-                detail.style.display = "none";
+                //detail.style.display = "none";
+                detail.classList.remove("active");
             }
         });
     }
@@ -62,7 +66,8 @@ var studyContentLib = (function(){
 
         var details = document.querySelectorAll(".contents-detail");
         details.forEach((detail, index) => {
-            detail.style.display = "none";
+            detail.classList.remove("active");
+            //detail.style.display = "none";
         });
     }
 
@@ -71,14 +76,14 @@ var studyContentLib = (function(){
     function requestContent(list){
         var content = list.pop();
         swh.loadContentsHtml("/"+content+'/logo.html', function(response){
-            var target = document.querySelector(".study-lists");
+            var target = document.querySelector(".study-subject-lists");
             target.innerHTML = target.innerHTML + '\n' + response;
             
             if(list.length > 0){
                 requestContent(list);
             }else{
                 
-                var lis = document.querySelectorAll(".study-lists .list");
+                var lis = document.querySelectorAll(".study-subject-lists .list");
                 
                 lis.forEach((li, index) => {
                     li.addEventListener("click", function(){
@@ -103,7 +108,7 @@ var studyContentLib = (function(){
     
     function studyContentsLoad(contentList){
         if(contentList.length > 0){
-            var target = document.querySelector(".study-lists");
+            var target = document.querySelector(".study-subject-lists");
             target.innerHTML = '';
             requestContent(contentList.reverse());
         }

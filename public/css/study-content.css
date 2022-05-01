@@ -1,20 +1,24 @@
 .study-content-container{
+    --theory-bg-color:rgba(147, 153, 142, 0.733); 
+    --etc-bg-color:rgba(95, 94, 97, 0.973); 
+
+
+
     --env-color:rgba(76, 112, 230, 0.459);
-    --lang-color:rgba(223, 43, 58, 0.459);
+    --lang-color:rgba(223, 43, 58, 0.175);
     --frame-color:rgba(87, 187, 30, 0.548);
     --api-color:rgba(237, 172, 177, 0.38);
     --db-color:rgba(106, 112, 117, 0.459);
-    --theory-color:rgba(138, 138, 224, 0.486);
+    --theory-color:rgba(178, 223, 142, 0.733); 
     --etc-color:rgba(255, 255, 255, 0.87);
-    
-    --env-hover-color:rgba(76, 112, 206, 0.6);
-    --lang-hover-color:rgba(230, 43, 58, 0.6);
-    --frame-hover-color:rgba(87, 187, 30, 0.6);
-    --api-hover-color:rgba(237, 172, 177, 0.6);
-    --db-hover-color:rgba(106, 112, 117, 0.6);
-    --theory-hover-color:rgba(138, 138, 224, 0.6);
-    --etc-hover-color:rgba(44, 43, 43, 0.884);
-
+   
+    --env-hover-shadow-color:rgba(76, 112, 206, 0.6);
+    --lang-hover-shadow-color:rgba(230, 43, 59, 0.5);
+    --frame-hover-shadow-color:rgba(87, 187, 30, 0.6);
+    --api-hover-shadow-color:rgba(237, 172, 177, 0.6);
+    --db-hover-shadow-color:rgba(106, 112, 117, 0.6);
+    --theory-hover-shadow-color:rgba(179, 223, 142, 0.904); 
+    --etc-hover-shadow-color:rgba(44, 43, 43, 0.884);
 }
 
 .study-content-container{
@@ -46,18 +50,17 @@
     transition: box-shadow 400ms ease-in-out
 }
 
-.list.etc {
-    background-color:#5f5e61;
-    
-}
 
-.list.env:hover{  box-shadow:5px 12px 7px var(--env-hover-color); }
-.list.lang:hover{  box-shadow:5px 12px 7px var(--lang-hover-color); }
-.list.frame:hover{  box-shadow:5px 12px 7px var(--frame-hover-color); }
-.list.api:hover{  box-shadow:5px 12px 7px var(--api-hover-color); }
-.list.db:hover{  box-shadow:5px 12px 7px var(--db-hover-color); }
-.list.theory:hover{  box-shadow:5px 12px 7px var(--theory-hover-color); }
-.list.etc:hover{  box-shadow:5px 12px 7px var(--etc-hover-color); }
+.list.theory {  background-color:var(--theory-bg-color); }
+.list.etc { background-color:var(--etc-bg-color); }
+
+.list.env:hover{  box-shadow:5px 12px 7px var(--env-hover-shadow-color); }
+.list.lang:hover{  box-shadow:5px 12px 7px var(--lang-hover-shadow-color); }
+.list.frame:hover{  box-shadow:5px 12px 7px var(--frame-hover-shadow-color); }
+.list.api:hover{  box-shadow:5px 12px 7px var(--api-hover-shadow-color); }
+.list.db:hover{  box-shadow:5px 12px 7px var(--db-hover-shadow-color); }
+.list.theory:hover{  box-shadow:5px 12px 7px var(--theory-hover-shadow-color); }
+.list.etc:hover{  box-shadow:5px 12px 7px var(--etc-hover-shadow-color); }
 
 
 .list.env .kind-color{ margin-left: 28px; width:50px; height:22px; background-color:var(--env-color) }
@@ -80,12 +83,23 @@
     filter: grayscale(4%);
 }
 
-.contents-detail{
-    display:none;
-    position:fixed;
-    height:290px;
+.list:hover ~ .contents-detail.active{
     width:35%;
+}
+
+
+.contents-detail{
+    /* display:none; */
+
+    display:block;
+    position:fixed;
     background-color:rgb(230, 222, 222);
     z-index:9999;
+    height:290px;
+    width:0px;
+    transition: 0.59s ease;
 }
+
+
+
 
