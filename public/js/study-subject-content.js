@@ -1,18 +1,8 @@
 var studyContentLib = (function(){
     var filepath = "./contents/study";
-
-    var time = 0;
-    setInterval(function(){
-        time++;
-        console.log(time);
-    }, 1000);
-
     function contentClick(target, idx){
-        console.log(target);
-        console.log(idx);
-
         var stdList = study.getStudyList();
-        //alert(stdList[idx]);
+        study.loadStudyList(stdList[idx]);
     }
 
     function contentHover(target, idx){
@@ -106,7 +96,7 @@ var studyContentLib = (function(){
 
 
     
-    function studyContentsLoad(contentList){
+    function requestSubjectList(contentList){
         if(contentList.length > 0){
             var target = document.querySelector(".study-subject-lists");
             target.innerHTML = '';
@@ -115,7 +105,7 @@ var studyContentLib = (function(){
     }
 
 
-    return {studyContentsLoad}
+    return {requestSubjectList}
 });
 
 

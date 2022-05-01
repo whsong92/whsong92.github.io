@@ -3,11 +3,11 @@ var studyLib = (function(){
     var selStudyList = [];
     var env = ['linux', 'wsl', 'docker', 'vscode', 'git', 'graalvm', 'jenkins'];
     var lang = ['language', 'html', 'css', 'javascript', 'python', 'java', 'clojure', 'rust'];
-    var frame = ['browser', 'reactjs', 'vuejs', 'svelte', 'electronjs', 'nodejs', 'spring', 'django', 'luminus','unreal'];
+    var frame = ['browser', 'reactjs', 'vuejs', 'svelte', 'electronjs', 'nodejs', 'spring', 'django', 'luminus'];
     var api = ['graphql', 'grpc'];
     var db = ['redis', 'mongodb', 'oracle', 'neo4j'];
     var theory = ['automata', 'compiler', 'blockchain', 'ipfs', 'deeplearning', 'os_kernel'];
-    var etc = ['photoshop', 'cakewalk', 'blender', 'economic'];
+    var etc = ['photoshop', 'cakewalk','unreal', 'blender', 'economic'];
     var all = [].concat(env).concat(lang).concat(frame).concat(api).concat(db).concat(theory).concat(etc);
     function getAll(){return all;}
     function getEnv(){return env;}
@@ -23,7 +23,6 @@ var studyLib = (function(){
         console.log("idx : " + idx);
         if(selMenuIdx != idx){
             selMenuIdx = idx;
-
 
             if(studyContent){
                 var list;
@@ -56,19 +55,76 @@ var studyLib = (function(){
 
                 var requestList = [...list];
                 selStudyList = [...list];
-                studyContent.studyContentsLoad(requestList);
+
+
+                console.log(selStudyList);
+
+                studyContent.requestSubjectList(requestList);
+                
             }
+        }
+        
+        divFocus("subject");
+    }
+
+    function divFocus(focus){
+        var subject = document.querySelector(".study-subject-content");
+        var list = document.querySelector(".study-list-content");
+
+
+
+        switch(focus){
+            case "subject":
+                subject.classList.add("max");
+                list.classList.add("min");
+                subject.classList.remove("min");
+                list.classList.remove("max");
+                break;
+            case "list":
+                subject.classList.add("min");
+                list.classList.add("max");
+                subject.classList.remove("max");
+                list.classList.remove("min");
+                break;
+            default:
+                break;
         }
     }
 
 
-    function init(){
-        swh.loadComponent(".study-content","study-content.html", this.setMenu);
+    function setSubject(subject){
+        studyList.requestList(subject);
+    }
+
+    function loadStudyLeftMenu(){
         swh.loadComponent(".study-left-menu","study-left-menu.html");
+    }
+
+    function loadStudySubject(){
+        console.log("==============");
+        swh.loadComponent(".study-subject-content","study-subject-content.html", function(){
+            setMenu();
+            divFocus("subject");
+        });
+    }
+
+    function loadStudyList(subject){
+        if(subject == null){
+            return;
+        }
+        swh.loadComponent(".study-list-content","study-list.html", function(){
+            setSubject(subject);
+            divFocus("list");
+        });
+    }
+
+    function init(){
+        loadStudyLeftMenu();
+        loadStudySubject();
     }
     
 
-    return {init, getAll, getEnv, getLang, getFrame, getApi, getDb, getTheory, getEtc, getStudyList, setMenu}
+    return {init, getAll, getEnv, getLang, getFrame, getApi, getDb, getTheory, getEtc, getStudyList, setMenu, loadStudyList}
 
 
 });

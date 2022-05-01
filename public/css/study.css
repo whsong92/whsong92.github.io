@@ -6,6 +6,9 @@
     margin: 0;
     padding: 0;
     padding-bottom:30px;
+    overflow-y:hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .study-left-menu{
@@ -16,14 +19,30 @@
     width:200px;
 }
 
-.study-content{
+.study-subject-content{
     display:block;
     margin-left:200px;
     width:auto;
-    height: auto;
     background-color:white;
-    overflow-y:scroll;
+    overflow-y:hidden;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    
+}
+
+.study-list-content{
+    display:block;
+    margin-left:200px;
+    width:auto;
+    background-color:white;
+    overflow-y:hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.max{
+    height:100%;
+}
+
+.min{
+    height:0;
 }

@@ -1,4 +1,4 @@
-.study-content-container{
+.study-subject-content-container{
     --theory-bg-color:rgba(147, 153, 142, 0.733); 
     --etc-bg-color:rgba(95, 94, 97, 0.973); 
 
@@ -21,7 +21,7 @@
     --etc-hover-shadow-color:rgba(44, 43, 43, 0.884);
 }
 
-.study-content-container{
+.study-subject-content-container{
     display:block;
     width:100%;
     height:100%;
@@ -31,7 +31,7 @@
 }
 
 
-.study-content::after{
+.study-subject-content::after{
     display:block;
     content:'';
     clear:both;
