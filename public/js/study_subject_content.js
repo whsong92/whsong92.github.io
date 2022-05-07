@@ -69,33 +69,31 @@ var studyContentLib = (function(){
             var target = document.querySelector(".study-subject-lists");
             target.innerHTML = target.innerHTML + '\n' + response;
             
-            if(list.length > 0){
-                requestContent(list);
-            }else{
-                
-                var lis = document.querySelectorAll(".study-subject-lists .list");
-                
-                lis.forEach((li, index) => {
-                    li.addEventListener("click", function(){
-                        contentClick(this, index);
+        });
+
+        swhCommon.sleep(80).then(
+            (function(){
+                if(list.length > 0){
+                    requestContent(list);
+                }else{            
+                    var lis = document.querySelectorAll(".study-subject-lists .list");
+                    lis.forEach((li, index) => {
+                        li.addEventListener("click", function(){
+                            contentClick(this, index);
+                        });
+                        li.addEventListener("mouseenter", function(){
+                            contentHover(this, index);
+                        });
+        
+                        li.addEventListener("mouseout", function(){
+                            contentHoverOut(this, index);
+                        });
                     });
-                    li.addEventListener("mouseenter", function(){
-                        contentHover(this, index);
-                    });
-
-                    li.addEventListener("mouseout", function(){
-                        contentHoverOut(this, index);
-                    });
-                });
-
-
-
-            }
-        });          
+                }
+            })
+        );        
     }
 
-
-    
     function requestSubjectList(contentList){
         if(contentList.length > 0){
             var target = document.querySelector(".study-subject-lists");
