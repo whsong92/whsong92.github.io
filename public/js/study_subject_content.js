@@ -71,7 +71,7 @@ var studyContentLib = (function(){
             
         });
 
-        swhCommon.sleep(85).then(
+        swhCommon.sleep(100).then(
             (function(){
                 if(list.length > 0){
                     requestContent(list);
