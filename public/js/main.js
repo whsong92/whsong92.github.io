@@ -41,3 +41,5 @@ function init(){
     swh.loadComponent(".navi-div", navi);
     swh.loadPages(".content-div", content);
 }
+
+

@@ -3,6 +3,7 @@ var swhLib = (function(){
     var loadedComponent = {};
     var loadedContent = {};
     var loadedScript = {};
+    var currentPage = "";
     
     function isDevEnv(){
         var result = false;
@@ -103,17 +104,23 @@ var swhLib = (function(){
     function getMainPage(){
         return loadedPage["mainPage"];
     }
-    
-    return {loadPage, loadPages, loadComponent, loadContent, loadContentsHtml, getMainPage};
+
+    function setHistory(page){
+        currentPage = page;
+    }
+
+    function goBack(e){
+        if(!currentPage){
+            currentPage = "study";
+        }
+        swh.loadPage(currentPage);       
+    }
+  
+    return {loadPage, loadPages, loadComponent, loadContent, loadContentsHtml, getMainPage, setHistory, goBack};
 });
 var swh = new swhLib();
 
 
-
-
-
-
-
-
-
-
+window.onpopstate = function(event){
+    swh.goBack(event);
+}

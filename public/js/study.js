@@ -113,6 +113,8 @@ var studyLib = (function(){
             return;
         }
         swh.loadComponent(".study-list-content","study-list.html", function(){
+            swh.setHistory("study");
+            history.pushState(null, null, "./main.html?page=study");
             setSubject(subject);
             divFocus("list");
         });

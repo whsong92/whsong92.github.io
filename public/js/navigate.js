@@ -1,12 +1,12 @@
 const logoBtn = document.querySelector(".navi-logo");
-const homeBtn = document.querySelector(".navi-home");
+//const homeBtn = document.querySelector(".navi-home");
 const studyBtn = document.querySelector(".navi-study");
 const projectBtn = document.querySelector(".navi-project");
 const aboutBtn = document.querySelector(".navi-about");
 
 
 logoBtn.addEventListener("click", logoClick);
-homeBtn.addEventListener("click", homeClick);
+//homeBtn.addEventListener("click", homeClick);
 studyBtn.addEventListener("click", studyClick);
 projectBtn.addEventListener("click", projectClick);
 aboutBtn.addEventListener("click", aboutClick);
