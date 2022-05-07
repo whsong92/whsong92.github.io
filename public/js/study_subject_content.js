@@ -71,7 +71,7 @@ var studyContentLib = (function(){
             
         });
 
-        swhCommon.sleep(80).then(
+        swhCommon.sleep(78).then(
             (function(){
                 if(list.length > 0){
                     requestContent(list);
@@ -89,6 +89,9 @@ var studyContentLib = (function(){
                             contentHoverOut(this, index);
                         });
                     });
+
+
+                    swhCommon.stopLoading();
                 }
             })
         );        
@@ -96,6 +99,7 @@ var studyContentLib = (function(){
 
     function requestSubjectList(contentList){
         if(contentList.length > 0){
+            swhCommon.startLoading();
             var target = document.querySelector(".study-subject-lists");
             target.innerHTML = '';
             requestContent(contentList.reverse());
