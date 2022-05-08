@@ -88,10 +88,13 @@ var studyContentLib = (function(){
                         li.addEventListener("mouseout", function(){
                             contentHoverOut(this, index);
                         });
+
+                        if(lis.length-1 == index){
+                            swhCommon.stopLoading();
+                        }
+
+
                     });
-
-
-                    swhCommon.stopLoading();
                 }
             })
         );        
