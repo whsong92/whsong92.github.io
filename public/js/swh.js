@@ -7,9 +7,11 @@ var swhLib = (function(){
     
     function isDevEnv(){
         var result = false;
-        var locat = location.hostname;
+        var hostname = location.hostname;
 
-        if(locat.indexOf("127.0.0.1") > 0 || locat.indexOf("localhost") > 0){
+        console.log("hostname : " + hostname);
+
+        if(hostname.indexOf("127.0.0.1") > -1 || hostname.indexOf("localhost") > -1){
             result = true;
         }
 
@@ -45,6 +47,23 @@ var swhLib = (function(){
 
 
     function loadContentsHtml(url, callback){
+        var prefix = "./contents/study/";
+        var fullUrl = prefix + url;
+
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+         
+            if(this.readyState == 4 && this.status == 200) {
+                var response = this.responseText;
+                callback(response);
+            }
+            
+        }
+        xhttp.open("GET", fullUrl, true);
+        xhttp.send();
+    }
+
+    function loadContentJson(){
         var prefix = "./contents/study/";
         var fullUrl = prefix + url;
 
@@ -116,7 +135,7 @@ var swhLib = (function(){
         swh.loadPage(currentPage);       
     }
   
-    return {loadPage, loadPages, loadComponent, loadContent, loadContentsHtml, getMainPage, setHistory, goBack};
+    return {isDevEnv, loadPage, loadPages, loadComponent, loadContent, loadContentsHtml, getMainPage, setHistory, goBack};
 });
 var swh = new swhLib();
 

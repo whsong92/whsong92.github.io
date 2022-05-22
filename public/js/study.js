@@ -7,7 +7,7 @@ var studyLib = (function(){
     var api = ['graphql', 'grpc'];
     var db = ['redis', 'mongodb', 'oracle', 'neo4j'];
     var theory = ['automata', 'compiler', 'blockchain', 'ipfs', 'deeplearning', 'os_kernel'];
-    var etc = ['photoshop', 'cakewalk','unreal', 'blender', 'economic'];
+    var etc = ['photoshop', 'composition','unreal', 'blender', 'economic'];
     var all = [].concat(env).concat(lang).concat(frame).concat(api).concat(db).concat(theory).concat(etc);
     function getAll(){return all;}
     function getEnv(){return env;}

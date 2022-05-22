@@ -1,8 +1,7 @@
 var studyContentLib = (function(){
     var filepath = "./contents/study";
     function contentClick(target, idx){
-        var stdList = study.getStudyList();
-        study.loadStudyList(stdList[idx]);
+        study.loadStudyList(target.getAttribute('id'));
     }
 
     function contentHover(target, idx){
@@ -99,6 +98,11 @@ var studyContentLib = (function(){
             })
         );        
     }
+
+
+
+
+
 
     function requestSubjectList(contentList){
         if(contentList.length > 0){
