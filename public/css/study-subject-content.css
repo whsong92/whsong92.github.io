@@ -84,14 +84,13 @@
 }
 
 .list:hover ~ .contents-detail.active{
+    display:block;
     width:35%;
 }
 
 
 .contents-detail{
-    /* display:none; */
-
-    display:block;
+    display:none;
     position:fixed;
     background-color:rgb(230, 222, 222);
     z-index:9999;

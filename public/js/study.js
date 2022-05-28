@@ -125,11 +125,12 @@ var studyLib = (function(){
                             if(obj[li].show.toUpperCase() == "Y"){
                                 var template = templateOrg.slice();
 
-                                template = template.replace('"{{id}}"', obj[li].title);
-                                template = template.replace('"{{kind}}"', "'" + "list " + obj[li].kind + "'");
-                                template = template.replace('{{img-src}}', obj[li].imgSrc);
-                                template = template.replace('{{total}}', obj[li].total);
-                                template = template.replace('{{lst_chg_dtm}}', obj[li].lstChgDtm);
+                                template = template.replaceAll('"{{id}}"', obj[li].title);
+                                template = template.replaceAll('"{{title}}"', obj[li].title);
+                                template = template.replaceAll('"{{kind}}"', "'" + "list " + obj[li].kind + "'");
+                                template = template.replaceAll('{{img-src}}', obj[li].imgSrc);
+                                template = template.replaceAll('{{total}}', obj[li].total);
+                                template = template.replaceAll('{{lst_chg_dtm}}', obj[li].lstChgDtm);
                                 
                                 target.innerHTML = target.innerHTML + '\n' + template;
                             }
