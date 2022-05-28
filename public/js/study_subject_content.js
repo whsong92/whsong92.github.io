@@ -64,7 +64,7 @@ var studyContentLib = (function(){
 
     function requestContent(list){
         var content = list.pop();
-        swh.loadContentsHtml("/"+content+'/logo.html', function(response){
+        swh.loadContentsHtml("/study/"+content+'/logo.html', function(response){
             var target = document.querySelector(".study-subject-lists");
             target.innerHTML = target.innerHTML + '\n' + response;
             
@@ -78,6 +78,8 @@ var studyContentLib = (function(){
                     var lis = document.querySelectorAll(".study-subject-lists .list");
                     lis.forEach((li, index) => {
                         li.addEventListener("click", function(){
+                            console.log("[start : addEventListener click ]==========================");
+                            console.log(this);
                             contentClick(this, index);
                         });
                         li.addEventListener("mouseenter", function(){
@@ -91,8 +93,6 @@ var studyContentLib = (function(){
                         if(lis.length-1 == index){
                             swhCommon.stopLoading();
                         }
-
-
                     });
                 }
             })

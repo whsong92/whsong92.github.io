@@ -7,7 +7,7 @@ var studyListLib = (function(){
         if(subject == null){
             return;
         }else{
-            var reqUrl = subject + fileName;
+            var reqUrl = "/study/" + subject + fileName;
 
             console.log(reqUrl);
 

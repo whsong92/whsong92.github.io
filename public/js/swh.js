@@ -47,7 +47,7 @@ var swhLib = (function(){
 
 
     function loadContentsHtml(url, callback){
-        var prefix = "./contents/study/";
+        var prefix = "./contents";
         var fullUrl = prefix + url;
 
         xhttp = new XMLHttpRequest();
@@ -63,8 +63,8 @@ var swhLib = (function(){
         xhttp.send();
     }
 
-    function loadContentJson(){
-        var prefix = "./contents/study/";
+    function loadContentJson(url, callback){
+        var prefix = "./contents";
         var fullUrl = prefix + url;
 
         xhttp = new XMLHttpRequest();
@@ -135,7 +135,7 @@ var swhLib = (function(){
         swh.loadPage(currentPage);       
     }
   
-    return {isDevEnv, loadPage, loadPages, loadComponent, loadContent, loadContentsHtml, getMainPage, setHistory, goBack};
+    return {isDevEnv, loadPage, loadPages, loadComponent, loadContent, loadContentsHtml, loadContentJson, getMainPage, setHistory, goBack};
 });
 var swh = new swhLib();
 

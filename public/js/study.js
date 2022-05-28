@@ -97,12 +97,12 @@ var studyLib = (function(){
     }
 
     function loadStudyLeftMenu(){
-        swh.loadComponent(".study-left-menu","study-left-menu.html");
+        swh.loadComponent(".study-left-menu","study_left_menu.html");
     }
 
     function loadStudySubject(){
         console.log("==============");
-        swh.loadComponent(".study-subject-content","study-subject-content.html", function(){
+        swh.loadComponent(".study-subject-content","study_subject_content.html", function(){
             setMenu();
             divFocus("subject");
         });
@@ -112,7 +112,7 @@ var studyLib = (function(){
         if(subject == null){
             return;
         }
-        swh.loadComponent(".study-list-content","study-list.html", function(){
+        swh.loadComponent(".study-list-content","study_list.html", function(){
             swh.setHistory("study");
             history.pushState(null, null, "./main.html?page=study");
             setSubject(subject);
