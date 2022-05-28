@@ -78,10 +78,7 @@ var studyContentLib = (function(){
                     var lis = document.querySelectorAll(".study-subject-lists .list");
                     lis.forEach((li, index) => {
                         console.log(li);
-                        debugger;
                         li.addEventListener("click", function(){
-                            console.log("[start : addEventListener click ]==========================");
-                            console.log(this);
                             contentClick(this, index);
                         });
                         li.addEventListener("mouseenter", function(){

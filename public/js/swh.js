@@ -63,8 +63,8 @@ var swhLib = (function(){
         xhttp.send();
     }
 
-    function loadContentJson(url, callback){
-        var prefix = "./contents";
+    function loadComponentHtml(url, callback){
+        var prefix = "./component";
         var fullUrl = prefix + url;
 
         xhttp = new XMLHttpRequest();
@@ -80,6 +80,21 @@ var swhLib = (function(){
         xhttp.send();
     }
 
+    function loadContentJson(url, callback){
+        var prefix = "./contents";
+        var fullUrl = prefix + url;
+
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                var response = this.responseText;
+                response != null && response != "" ? callback(JSON.parse(response)) : callback();
+            }
+        }
+        xhttp.open("GET", fullUrl, true);
+        xhttp.send();
+    }
+
 
  
     
@@ -87,15 +102,17 @@ var swhLib = (function(){
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if(this.readyState == 4 && this.status == 200) {
-                console.log(this.status);
-                console.log(this);
-                target.innerHTML  = this.responseText;
-                var scriptList = target.querySelectorAll("script");
-                console.log(scriptList);
-                for(var i=0; i < scriptList.length; i++){
-                    if(scriptList[i].src){
+                if(target){
+                    target.innerHTML  = this.responseText;
+                    var scriptList = target.querySelectorAll("script");
+                    console.log(scriptList);
+                    for(var i=0; i < scriptList.length; i++){
+                        if(scriptList[i].src){
                         loadScript(scriptList[i].src, callback);
+                        }
                     }
+                }else{
+
                 }
             }
         }
@@ -135,7 +152,7 @@ var swhLib = (function(){
         swh.loadPage(currentPage);       
     }
   
-    return {isDevEnv, loadPage, loadPages, loadComponent, loadContent, loadContentsHtml, loadContentJson, getMainPage, setHistory, goBack};
+    return {isDevEnv, loadPage, loadPages, loadComponent, loadContent, loadContentsHtml, loadComponentHtml, loadContentJson, getMainPage, setHistory, goBack};
 });
 var swh = new swhLib();
 

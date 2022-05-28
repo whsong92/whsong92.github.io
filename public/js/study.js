@@ -19,6 +19,67 @@ var studyLib = (function(){
     function getEtc(){return etc;}
     function getStudyList(){return selStudyList;}
 
+    function contentClick(target, idx){
+        study.loadStudyList(target.getAttribute('id'));
+    }
+
+    function contentHover(target, idx){
+        console.log(target);
+        console.log(idx);
+
+        var offset = target.getBoundingClientRect();
+        var top = offset.top;
+        var bottom = offset.bottom;
+        var left = offset.left;
+        var right = offset.right;
+
+
+        var details = document.querySelectorAll(".contents-detail");
+        details.forEach((detail, index) => {
+            if(index == idx){
+
+                console.log("top : " + top);
+                console.log("bottom : " + bottom);
+                console.log("left : " + left);
+                console.log("right : " + right);
+                console.log("window height : " + window.innerHeight);
+                console.log("window width : " + window.innerWidth);
+
+                var isLeft = window.innerWidth / 2 > left ? true : false;
+                if(isLeft){
+                    detail.style.left = left + "px";
+                }else{
+                    detail.style.right = (window.innerWidth - right) + "px";
+                }
+                
+                var isBottom = window.innerHeight - bottom > 150 ? true : false;
+                if(isBottom){
+                    detail.style.top = top + 240 + "px";
+                }else{
+                    detail.style.top =  top - 300 + "px";
+                }
+                //detail.style.display = "block";
+                detail.classList.add("active");
+            }else{
+                //detail.style.display = "none";
+                detail.classList.remove("active");
+            }
+        });
+    }
+
+    function contentHoverOut(target, idx){
+        console.log("Hover out");
+        console.log(target);
+        console.log(idx);
+
+        var details = document.querySelectorAll(".contents-detail");
+        details.forEach((detail, index) => {
+            detail.classList.remove("active");
+            //detail.style.display = "none";
+        });
+    }
+
+
     function setMenu(idx = 0){
         console.log("idx : " + idx);
         if(selMenuIdx != idx){
@@ -56,10 +117,45 @@ var studyLib = (function(){
                 var requestList = [...list];
                 selStudyList = [...list];
 
+                swh.loadComponentHtml("/study_subject_logo_template.html", function(templateOrg){
+                    swh.loadContentJson("/study/study.json", function(obj){
+                        var target = document.querySelector(".study-subject-lists");
+                        target.innerHTML = "";
+                        list.forEach((li, index) => {
+                            if(obj[li].show.toUpperCase() == "Y"){
+                                var template = templateOrg.slice();
 
-                console.log(selStudyList);
+                                template = template.replace('"{{id}}"', obj[li].title);
+                                template = template.replace('"{{kind}}"', "'" + "list " + obj[li].kind + "'");
+                                template = template.replace('{{img-src}}', obj[li].imgSrc);
+                                template = template.replace('{{total}}', obj[li].total);
+                                template = template.replace('{{lst_chg_dtm}}', obj[li].lstChgDtm);
+                                
+                                target.innerHTML = target.innerHTML + '\n' + template;
+                            }
 
-                studyContent.requestSubjectList(requestList);
+
+                            if(list.length-1 == index){
+                                var lis = document.querySelectorAll(".study-subject-lists .list");
+                                lis.forEach((li, index) => {
+                                    console.log(li);
+                                    li.addEventListener("click", function(){
+                                        contentClick(this, index);
+                                    });
+                                    li.addEventListener("mouseenter", function(){
+                                        contentHover(this, index);
+                                    });
+                    
+                                    li.addEventListener("mouseout", function(){
+                                        contentHoverOut(this, index);
+                                    });
+                                }); 
+                            }
+                        });                      
+                    });
+                })
+                //일단 테스트용
+                //studyContent.requestSubjectList(requestList);
                 
             }
         }
