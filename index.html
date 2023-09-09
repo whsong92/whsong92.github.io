@@ -5,7 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    Hello world
-</body>
+<script>
+    const isMobile = () => {
+        const user = navigator.userAgent;
+        let isCheck = false;
+    
+        if ( user.indexOf("iPhone") > -1 || user.indexOf("Android") > -1 ) {
+            console.log(user);
+            isCheck = true;
+        }
+    
+        return isCheck;
+    }
+
+    function init(){
+        if(isMobile()){
+            //mobile
+            location.href = "./mobile/index.html";
+        }else{
+            //pc
+            location.href = "./pc/index.html";
+        }
+    };
+
+    init();
+</script>
 </html>
