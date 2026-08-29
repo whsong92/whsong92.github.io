@@ -3,7 +3,7 @@ import { marked } from 'marked';
 
 export const GITHUB_CONFIG = {
     owner: 'whsong92',
-    repo: 'swhBlog',
+    repo: 'whsong92.github.io',
     branch: 'main',
     blogPath: 'src/content/blog',
 };
