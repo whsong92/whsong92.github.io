@@ -1,28 +1,63 @@
-/* src/styles/global.css */
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@layer base {
-    :root {
-        --background: 222.2 84% 4.9%;
-        --foreground: 210 40% 98%;
-        --card: 222.2 84% 4.9%;
-        --card-foreground: 210 40% 98%;
-        --popover: 222.2 84% 4.9%;
-        --popover-foreground: 210 40% 98%;
-        --primary: 210 40% 98%;
-        --primary-foreground: 222.2 47.4% 11.2%;
-        --secondary: 217.2 32.6% 17.5%;
-        --secondary-foreground: 210 40% 98%;
-        --muted: 217.2 32.6% 17.5%;
-        --muted-foreground: 215 20.2% 65.1%;
-        --accent: 217.2 32.6% 17.5%;
-        --accent-foreground: 210 40% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 210 40% 98%;
-        --border: 217.2 32.6% 17.5%;
-        --input: 217.2 32.6% 17.5%;
-        --ring: 212.7 26.8% 83.9%;
-        --radius: 0.75rem;
-    }
+/* Tailwind v4 디자인 시스템 토큰 정의 */
+@theme {
+    --color-carbon: #0E0F12;
+    --color-paper: #F4F4F5;
+
+    --color-silver-line: #2E323B;
+    --color-silver-muted: #A1A4B2;
+    --color-silver-bright: #E2E4E9;
+
+    --color-topic-learning: #FF5722;
+    --color-topic-ai: #38BDF8;
+    --color-topic-etc: #34D399;
+
+    --font-sans: 'Inter', sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* 브라우저 기본 배경 강제 고정 */
+html,
+body {
+    background-color: var(--color-carbon) !important;
+    color: var(--color-paper) !important;
+    margin: 0;
+    padding: 0;
+}
+
+/* 0px 하드웨어 엣지 강제 */
+* {
+    border-radius: 0px !important;
+}
+
+/* LED 인디케이터 효과 */
+.led-learning {
+    box-shadow: 0 0 6px #FF5722, 0 0 12px rgba(255, 87, 34, 0.45);
+}
+
+.led-ai {
+    box-shadow: 0 0 6px #38BDF8, 0 0 12px rgba(56, 189, 248, 0.45);
+}
+
+.led-etc {
+    box-shadow: 0 0 6px #34D399, 0 0 12px rgba(52, 211, 153, 0.45);
+}
+
+.led-white {
+    box-shadow: 0 0 6px #F4F4F5, 0 0 12px rgba(244, 244, 245, 0.4);
+}
+
+.glow-learning {
+    text-shadow: 0 0 8px rgba(255, 87, 34, 0.6);
+}
+
+.glow-ai {
+    text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+.glow-etc {
+    text-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
 }

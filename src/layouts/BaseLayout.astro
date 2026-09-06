@@ -1,0 +1,151 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const {
+    title = "ARCHIVE // SYS.ONLINE",
+    description = "Notes on reactive architectures, synthetic cognition, and systems design.",
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="ko" class="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <ClientRouter />
+
+        <style is:global>
+            * {
+                border-radius: 0px !important;
+                box-shadow: none;
+            }
+            .led-learning {
+                box-shadow:
+                    0 0 6px #ff5722,
+                    0 0 12px rgba(255, 87, 34, 0.45);
+            }
+            .led-ai {
+                box-shadow:
+                    0 0 6px #38bdf8,
+                    0 0 12px rgba(56, 189, 248, 0.45);
+            }
+            .led-misc {
+                box-shadow:
+                    0 0 6px #34d399,
+                    0 0 12px rgba(52, 211, 153, 0.45);
+            }
+            .led-white {
+                box-shadow:
+                    0 0 6px #f4f4f5,
+                    0 0 12px rgba(244, 244, 245, 0.4);
+            }
+
+            .glow-learning {
+                text-shadow: 0 0 8px rgba(255, 87, 34, 0.6);
+            }
+            .glow-ai {
+                text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+            }
+            .glow-misc {
+                text-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+            }
+        </style>
+    </head>
+    <body
+        class="bg-carbon text-paper min-h-screen flex flex-col font-sans antialiased selection:bg-paper selection:text-carbon overflow-x-hidden">
+        <!-- 최상단 반응형 콘솔 헤더 -->
+        <header class="w-full bg-carbon/90 backdrop-blur-md border-b border-silver-line sticky top-0 z-50">
+            <div
+                class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center w-full px-4 sm:px-6 md:px-8 max-w-5xl mx-auto py-2.5 sm:py-0 sm:h-14 gap-2 sm:gap-4">
+                <div class="flex justify-between items-center">
+                    <a href="/" class="flex items-center gap-2.5 group">
+                        <span class="inline-block w-[2px] h-3.5 bg-paper group-hover:led-white transition-all"></span>
+                        <span class="text-xs sm:text-sm font-heading font-semibold uppercase tracking-tight text-paper">
+                            SWH BLOG || ARCHIVE
+                        </span>
+                    </a>
+                    <span class="text-[10px] font-mono text-silver-muted sm:hidden">SYS.V2</span>
+                </div>
+
+                <!-- 프레임워크 허브 채널 선택기 (모바일 터치 스크롤 대응) -->
+                <nav class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 text-xs font-mono no-scrollbar">
+                    <a
+                        href="/svelte"
+                        class:list={[
+                            "px-2.5 py-1 border transition-all whitespace-nowrap flex items-center gap-1.5",
+                            currentPath.startsWith("/svelte")
+                                ? "border-topic-learning text-topic-learning led-learning"
+                                : "border-silver-line text-silver-muted hover:text-paper",
+                        ]}>
+                        <span class="w-1.5 h-1.5 bg-topic-learning"></span>
+                        <span>01.DEV</span>
+                    </a>
+
+                    <a
+                        href="/react"
+                        class:list={[
+                            "px-2.5 py-1 border transition-all whitespace-nowrap flex items-center gap-1.5",
+                            currentPath.startsWith("/react")
+                                ? "border-topic-ai text-topic-ai led-ai"
+                                : "border-silver-line text-silver-muted hover:text-paper",
+                        ]}>
+                        <span class="w-1.5 h-1.5 bg-topic-ai"></span>
+                        <span>02.AI</span>
+                    </a>
+
+                    <a
+                        href="/vue"
+                        class:list={[
+                            "px-2.5 py-1 border transition-all whitespace-nowrap flex items-center gap-1.5",
+                            currentPath.startsWith("/vue")
+                                ? "border-topic-misc text-topic-misc led-misc"
+                                : "border-silver-line text-silver-muted hover:text-paper",
+                        ]}>
+                        <span class="w-1.5 h-1.5 bg-topic-misc"></span>
+                        <span>03.ETC</span>
+                    </a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- 반응형 메인 컨테이너 -->
+        <main class="w-full flex-1 max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 space-y-12">
+            <slot />
+        </main>
+
+        <!-- 반응형 푸터 -->
+        <footer class="w-full bg-carbon border-t border-silver-line mt-16">
+            <div
+                class="flex flex-col md:flex-row justify-between items-center w-full px-4 sm:px-6 md:px-8 py-8 max-w-5xl mx-auto gap-4 text-xs font-mono">
+                <div class="flex flex-col gap-1 text-center md:text-left text-silver-muted">
+                    <span class="uppercase text-paper">© 2026 SYS.ONLINE</span>
+                    <span class="text-[10px]">Astro 5 · Bun · 3 Isolated Runtimes</span>
+                </div>
+                <div class="flex items-center gap-4 sm:gap-6 text-[11px]">
+                    <a class="text-paper underline underline-offset-4" href="/">INDEX</a>
+                    <a class="text-silver-muted hover:text-topic-learning transition-colors" href="/svelte">SVELTE</a>
+                    <a class="text-silver-muted hover:text-topic-ai transition-colors" href="/react">REACT</a>
+                    <a class="text-silver-muted hover:text-topic-misc transition-colors" href="/vue">VUE</a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

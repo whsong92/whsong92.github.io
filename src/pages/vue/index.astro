@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import VueHub from "../../views/vue/VueHub.vue";
+---
+
+<BaseLayout title="03.ETC // VUE RUNTIME">
+    <!-- client:load 대신 반드시 client:only="vue" 로 설정 -->
+    <VueHub client:only="vue" />
+</BaseLayout>

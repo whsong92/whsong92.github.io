@@ -1,5 +1,6 @@
 import { Octokit } from '@octokit/rest';
 import { marked } from 'marked';
+const isDev = import.meta.env.DEV;
 
 export const GITHUB_CONFIG = {
     owner: 'whsong92',
@@ -36,18 +37,31 @@ export interface PostMeta {
 }
 
 export async function fetchPostList(): Promise<PostMeta[]> {
+    if (isDev) {
+        return [];
+    }
     try {
         const res = await fetch(
-            `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.blogPath}`
+            `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.blogPath}`,
+            { headers: { Accept: 'application/vnd.github.v3+json' } }
         );
         if (!res.ok) return [];
         const files = await res.json();
+        if (!Array.isArray(files)) return [];
+
         return files
-            .filter((file: any) => file.name.endsWith('.md'))
+            .filter((file: any) => {
+                const name = file.name.toLowerCase();
+                const isMarkdown = name.endsWith('.md');
+                const isHidden = name.includes('hide') || name.startsWith('_') || name.includes('draft');
+                return isMarkdown && !isHidden;
+            })
             .map((file: any) => ({
                 name: file.name.replace(/\.md$/, ''),
-                slug: file.name,
+                path: file.path,
+                sha: file.sha,
                 download_url: file.download_url,
+                slug: file.name.replace(/\.md$/, ''),
             }));
     } catch (e) {
         console.error('글 목록 로드 실패:', e);
