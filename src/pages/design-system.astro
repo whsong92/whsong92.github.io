@@ -1,0 +1,237 @@
+---
+// src/pages/design-system.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="DESIGN SYSTEM // UI SPEC">
+    <div class="space-y-16 py-6">
+        <!-- 섹션 1: 타이포그래피 & 컬러 인디케이터 -->
+        <section class="space-y-4">
+            <div class="border-b border-silver-line pb-2">
+                <h2 class="text-sm font-mono text-silver-muted uppercase tracking-wider">
+                    01. TYPOGRAPHY & LED ACCENTS
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 border border-silver-line bg-carbon flex items-center gap-3">
+                    <span class="inline-block w-2.5 h-2.5 bg-topic-learning led-learning shrink-0"></span>
+                    <div>
+                        <div class="text-xs font-mono text-topic-learning font-bold">TOPIC: DEV</div>
+                        <div class="text-[10px] font-mono text-silver-muted">SVELTE RUNTIME (#FF5722)</div>
+                    </div>
+                </div>
+
+                <div class="p-4 border border-silver-line bg-carbon flex items-center gap-3">
+                    <span class="inline-block w-2.5 h-2.5 bg-topic-ai led-ai shrink-0"></span>
+                    <div>
+                        <div class="text-xs font-mono text-topic-ai font-bold">TOPIC: AI</div>
+                        <div class="text-[10px] font-mono text-silver-muted">REACT RUNTIME (#38BDF8)</div>
+                    </div>
+                </div>
+
+                <div class="p-4 border border-silver-line bg-carbon flex items-center gap-3">
+                    <span class="inline-block w-2.5 h-2.5 bg-topic-etc led-etc shrink-0"></span>
+                    <div>
+                        <div class="text-xs font-mono text-topic-etc font-bold">TOPIC: ETC</div>
+                        <div class="text-[10px] font-mono text-silver-muted">VUE RUNTIME (#34D399)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 2: 버튼 규격 쇼케이스 -->
+        <section class="space-y-4">
+            <div class="border-b border-silver-line pb-2">
+                <h2 class="text-sm font-mono text-silver-muted uppercase tracking-wider">02. BUTTON COMPONENTS</h2>
+            </div>
+
+            <div class="flex flex-wrap gap-4 items-center p-6 border border-silver-line bg-carbon">
+                <!-- 기본 단색 버튼 -->
+                <button
+                    class="px-4 py-2 bg-paper text-carbon border border-transparent text-xs font-mono font-bold hover:bg-black hover:border-white hover:text-white transition cursor-pointer">
+                    PRIMARY_ACTION
+                </button>
+
+                <!-- 아웃라인 버튼 -->
+                <button
+                    class="px-4 py-2 border border-silver-line text-silver-bright text-xs font-mono hover:border-paper hover:text-white transition cursor-pointer">
+                    SECONDARY_OUTLINE
+                </button>
+
+                <!-- 아웃라인 버튼 -->
+                <button
+                    class="px-4 py-2 border border-silver-line text-silver-bright text-xs font-mono hover:bg-white hover:border-white hover:text-black transition cursor-pointer">
+                    SECONDARY_OUTLINE
+                </button>
+
+                <!-- 도메인 LED 액션 버튼 -->
+                <button
+                    class="px-3 py-1.5 border border-topic-learning text-topic-learning text-xs font-mono font-bold hover:bg-topic-learning hover:text-carbon transition cursor-pointer">
+                    DEV_TAG_BTN
+                </button>
+                <button
+                    class="px-3 py-1.5 border border-topic-ai text-topic-ai text-xs font-mono font-bold hover:bg-topic-ai hover:text-carbon transition cursor-pointer">
+                    AI_TAG_BTN
+                </button>
+                <button
+                    class="px-3 py-1.5 border border-topic-etc text-topic-etc text-xs font-mono font-bold hover:bg-topic-etc hover:text-carbon transition cursor-pointer">
+                    ETC_TAG_BTN
+                </button>
+            </div>
+        </section>
+
+        <!-- 섹션 3: 리스트 아이템 & 버티컬 띠지 규격 -->
+        <section class="space-y-4">
+            <div class="border-b border-silver-line pb-2">
+                <h2 class="text-sm font-mono text-silver-muted uppercase tracking-wider">
+                    03. DISPATCH CARDS (VERTICAL ACCENTS)
+                </h2>
+            </div>
+
+            <div class="divide-y divide-silver-line border border-silver-line bg-carbon">
+                <!-- Dev 카드 -->
+                <div class="relative p-5 pl-6 group transition cursor-pointer hover:bg-card">
+                    <div
+                        class="absolute left-0 top-3 bottom-3 w-[3px] bg-topic-learning opacity-40 group-hover:opacity-100 group-hover:led-learning transition-all">
+                    </div>
+                    <div class="flex justify-between text-xs font-mono mb-1">
+                        <h3 class="text-base font-heading font-semibold text-paper group-hover:text-white">
+                            Architecture and State Hydration in Distributed Frameworks
+                        </h3>
+                        <span class="text-silver-muted">2026.09.07</span>
+                    </div>
+                    <p class="text-xs text-silver-muted mt-3 leading-loose">
+                        <span class="bg-paper text-carbon px-1.5 py-0.5 box-decoration-clone">
+                            Example summary description verifying typography contrast and spacing. Example summary
+                            description verifying typography contrast and spacing. Example summary description verifying
+                            typography contrast and spacing. Example summary description verifying typography contrast
+                            and spacing. Example summary description verifying typography contrast and spacing.
+                        </span>
+                    </p>
+                </div>
+
+                <!-- AI 카드 -->
+                <div class="relative p-5 pl-6 group transition cursor-pointer hover:bg-card">
+                    <div
+                        class="absolute left-0 top-3 bottom-3 w-[3px] bg-topic-ai opacity-40 group-hover:opacity-100 group-hover:led-ai transition-all">
+                    </div>
+                    <div class="flex justify-between text-xs font-mono mb-1">
+                        <h3 class="text-base font-heading font-semibold text-paper group-hover:text-white">
+                            Vector Topology and Graph Sense Inductions
+                        </h3>
+                        <span class="text-silver-muted">2026.09.06</span>
+                    </div>
+                    <p class="text-xs text-silver-muted mt-3">
+                        <span class="bg-paper text-carbon px-1.5 py-0.5 box-decoration-clone">
+                            High-dimensional embeddings tested across neural latent cluster nodes.
+                        </span>
+                    </p>
+                </div>
+
+                <!-- ETC 카드 -->
+                <div class="relative p-5 pl-6 group transition cursor-pointer hover:bg-card">
+                    <div
+                        class="absolute left-0 top-3 bottom-3 w-[3px] bg-topic-etc opacity-40 group-hover:opacity-100 group-hover:led-etc transition-all">
+                    </div>
+                    <div class="flex justify-between text-xs font-mono mb-1">
+                        <h3 class="text-base font-heading font-semibold text-paper group-hover:text-white">
+                            Vector Topology and Graph Sense Inductions
+                        </h3>
+                        <span class="text-silver-muted">2026.09.06</span>
+                    </div>
+                    <p class="text-xs text-silver-muted mt-3">
+                        <span class="bg-paper text-carbon px-1.5 py-0.5 box-decoration-clone">
+                            High-dimensional embeddings tested across neural latent cluster nodes.
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 4: 팝업 / 모달 규격 -->
+        <section class="space-y-4">
+            <div class="border-b border-silver-line pb-2">
+                <h2 class="text-sm font-mono text-silver-muted uppercase tracking-wider">04. MODAL / DIALOG SPEC</h2>
+            </div>
+
+            <div class="p-6 border border-silver-line bg-[#14151A] max-w-lg space-y-4">
+                <div class="flex justify-between items-center border-b border-silver-line pb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-paper"></span>
+                        <span class="text-xs font-mono font-bold text-paper uppercase">MODAL_CONTAINER // SPEC</span>
+                    </div>
+                    <span class="text-[10px] font-mono text-silver-muted">[ESC]</span>
+                </div>
+                <div class="text-xs text-silver-muted leading-relaxed font-sans">
+                    This container serves as the master blueprint for system alerts, search overlays, or detail cards
+                    without round corners.
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button
+                        class="px-3 py-1.5 border border-silver-line text-xs font-mono text-silver-muted hover:text-white">
+                        DISMISS
+                    </button>
+                    <button
+                        class="px-3 py-1.5 bg-paper text-carbon text-xs font-mono font-bold hover:bg-card hover:text-white">
+                        CONFIRM
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 5: 드래그/하이라이트 반전 효과 쇼케이스 -->
+        <section class="space-y-4">
+            <div class="border-b border-silver-line pb-2">
+                <h2 class="text-sm font-mono text-silver-muted uppercase tracking-wider">
+                    05. INVERTED HIGHLIGHT ACCENTS
+                </h2>
+            </div>
+
+            <div class="p-6 border border-silver-line bg-carbon space-y-6">
+                <!-- Type A: 클래식 드래그 반전 (고정형) -->
+                <div class="space-y-1">
+                    <div class="text-[10px] font-mono text-silver-muted uppercase">Type A: Static White Inversion</div>
+                    <h3 class="text-base font-heading font-semibold">
+                        <span class="bg-paper text-carbon px-1.5 py-0.5 box-decoration-clone">
+                            Architecture and State Hydration in Distributed Frameworks
+                        </span>
+                    </h3>
+                    <p class="text-xs text-silver-muted mt-1">Example summary description under inverted heading.</p>
+                </div>
+
+                <!-- Type B: 도메인 컬러 드래그 반전 -->
+                <div class="space-y-2">
+                    <div class="text-[10px] font-mono text-silver-muted uppercase">Type B: Domain Color Highlights</div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-topic-learning text-carbon font-mono text-xs font-bold px-2 py-0.5">
+                            [DEV // SVELTE COMPONENT]
+                        </span>
+                        <span class="bg-topic-ai text-carbon font-mono text-xs font-bold px-2 py-0.5">
+                            [AI // NEURAL TOPOLOGY]
+                        </span>
+                        <span class="bg-topic-etc text-carbon font-mono text-xs font-bold px-2 py-0.5">
+                            [ETC // REACTIVE VUE]
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Type C: 카드 호버 시 자동 드래그 반전 -->
+                <div class="space-y-1">
+                    <div class="text-[10px] font-mono text-silver-muted uppercase">
+                        Type C: Interactive Selection on Card Hover
+                    </div>
+                    <div class="p-4 border border-silver-line bg-[#14151A] group cursor-pointer">
+                        <div class="text-[11px] font-mono text-silver-muted mb-1">HOVER THIS CARD</div>
+                        <h3 class="text-base font-heading font-semibold text-paper">
+                            <span
+                                class="transition-all duration-150 group-hover:bg-paper group-hover:text-carbon px-1 py-0.5">
+                                Vector Topology and Graph Sense Inductions
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</BaseLayout>

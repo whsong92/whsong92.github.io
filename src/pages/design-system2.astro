@@ -1,0 +1,341 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="DESIGN SYSTEM 02 // 한글 타이포그래피 & 실전 쇼케이스">
+    <div class="space-y-20 py-8 max-w-5xl mx-auto">
+        <!-- 상단 안내 헤더 -->
+        <header
+            class="border-b border-silver-line pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="inline-block w-2.5 h-2.5 bg-paper led-white shrink-0"></span>
+                    <h1 class="text-xl sm:text-2xl font-heading font-bold text-paper tracking-tight">
+                        KOREAN TYPOGRAPHY & DISPATCH SHOWCASE
+                    </h1>
+                </div>
+                <p class="text-xs font-mono text-silver-muted mt-1">
+                    SPEC: PRETENDARD + INTER // WORD-BREAK: KEEP-ALL // NO-RADIUS
+                </p>
+            </div>
+            <a
+                href="/design-system"
+                class="text-xs font-mono text-silver-muted hover:text-paper border border-silver-line hover:border-paper px-3 py-1.5 transition self-start sm:self-auto">
+                ← BACK TO DS-01
+            </a>
+        </header>
+
+        <!-- 01. 한글 헤딩 시스템 (H1 ~ H6) -->
+        <section class="space-y-4">
+            <div class="border-b border-silver-line pb-2 flex justify-between items-center">
+                <h2 class="text-xs font-mono text-silver-muted uppercase tracking-wider">01. HEADING SPEC (H1 - H6)</h2>
+                <span class="text-[10px] font-mono text-silver-muted">한글 자간 및 크기 밸런스</span>
+            </div>
+
+            <div class="border border-silver-line bg-carbon p-6 sm:p-8 space-y-8 divide-y divide-silver-line/40">
+                <!-- H1 -->
+                <div>
+                    <div class="flex items-center justify-between text-[10px] font-mono text-silver-muted mb-2">
+                        <span>H1 // 30px // Bold</span>
+                        <span>메인 아티클 대표 타이틀</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-paper leading-snug">
+                        마이크로서비스 환경에서의 반응형 이벤트 기반 아키텍처 설계
+                    </h1>
+                </div>
+
+                <!-- H2 -->
+                <div class="pt-6">
+                    <div class="flex items-center justify-between text-[10px] font-mono text-silver-muted mb-2">
+                        <span>H2 // 22px // SemiBold</span>
+                        <span>중단락 및 섹션 헤더</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-semibold text-paper leading-snug">
+                        상태 동기화와 클라이언트 아일랜드 격리 구조
+                    </h2>
+                </div>
+
+                <!-- H3 -->
+                <div class="pt-6">
+                    <div class="flex items-center justify-between text-[10px] font-mono text-silver-muted mb-2">
+                        <span>H3 // 18px // SemiBold</span>
+                        <span>소단락 및 세부 기술 토픽</span>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-semibold text-silver-bright leading-normal">
+                        대규모 트래픽 발생 시 트랜잭션 롤백과 이벤트 순서 보장 매커니즘
+                    </h3>
+                </div>
+
+                <!-- H4 -->
+                <div class="pt-6">
+                    <div class="flex items-center justify-between text-[10px] font-mono text-silver-muted mb-2">
+                        <span>H4 // 15px // Medium</span>
+                        <span>항목별 소제목 및 리스트 헤더</span>
+                    </div>
+                    <h4 class="text-sm sm:text-base font-medium text-silver-bright">
+                        실시간 데이터 스트림 처리를 위한 메모리 캐싱 계층 구현
+                    </h4>
+                </div>
+
+                <!-- H5 -->
+                <div class="pt-6">
+                    <div class="flex items-center justify-between text-[10px] font-mono text-silver-muted mb-2">
+                        <span>H5 // 13px // Medium</span>
+                        <span>인덱스/부록 번호 체계</span>
+                    </div>
+                    <h5 class="text-xs sm:text-sm font-medium text-silver-muted">
+                        01-A. 분산 노드 간의 클록 동기화 및 타임스탬프 오류 분석
+                    </h5>
+                </div>
+
+                <!-- H6 -->
+                <div class="pt-6">
+                    <div class="flex items-center justify-between text-[10px] font-mono text-silver-muted mb-2">
+                        <span>H6 // 11px // Regular</span>
+                        <span>참조 주석 및 캡션</span>
+                    </div>
+                    <h6 class="text-xs font-normal text-silver-muted">
+                        참조 명세: Raft 알고리즘 기반의 분산 합의 프로토콜과 로그 복제 절차
+                    </h6>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. 본문 및 마크다운 구성 요소 (Prose & Highlights) -->
+        <section class="space-y-4">
+            <div class="border-b border-silver-line pb-2 flex justify-between items-center">
+                <h2 class="text-xs font-mono text-silver-muted uppercase tracking-wider">
+                    02. PROSE ELEMENTS & INLINE HIGHLIGHTS
+                </h2>
+                <span class="text-[10px] font-mono text-silver-muted">마크다운 본문 파싱 규격</span>
+            </div>
+
+            <div
+                class="border border-silver-line bg-carbon p-6 sm:p-8 space-y-6 text-sm text-silver-bright leading-relaxed">
+                <div>
+                    <span class="text-[10px] font-mono text-silver-muted block mb-2"
+                        >일반 본문 단락 + 인라인 드래그 반전 박스</span
+                    >
+                    <p>
+                        웹 프론트엔드의 구조가 고도화되면서 단일 프레임워크에 종속되지 않는 멀티 런타임 아일랜드 패턴이
+                        중요한 대안으로 자리잡고 있습니다. 정적 콘텐츠는 Astro 빌드 타임에서 마크다운 파싱을 거쳐
+                        초고속으로 전송되며, 복잡한 인터랙션이 요구되는 영역만 Svelte, React, Vue로 개별
+                        하이드레이션하여 메모리 오버헤드를 극단적으로 억제합니다.
+                    </p>
+                </div>
+
+                <div>
+                    <span class="text-[10px] font-mono text-silver-muted block mb-2">인용구 (Blockquote)</span>
+                    <blockquote class="border-l-2 border-silver-bright pl-4 py-1.5 text-paper bg-[#14151A] italic">
+                        "완벽한 아키텍처는 더 이상 추가할 것이 없을 때가 아니라, 시스템의 안정성을 해치지 않고 더 이상
+                        덜어낼 것이 없을 때 완성된다."
+                    </blockquote>
+                </div>
+
+                <div>
+                    <span class="text-[10px] font-mono text-silver-muted block mb-2"
+                        >인라인 코드 & 코드 블록 (Code Block)</span
+                    >
+                    <p class="mb-2">
+                        설정 파일은 전역에서 <code
+                            class="px-1.5 py-0.5 bg-[#14151A] border border-silver-line text-topic-ai font-mono text-xs"
+                            >astro.config.mjs</code
+                        >를 통해 통합 관리됩니다.
+                    </p>
+                    <pre
+                        class="border border-silver-line bg-[#08080A] p-4 text-xs font-mono text-silver-bright overflow-x-auto leading-relaxed"><code>// 런타임 라우팅 및 쿼리 파라미터 매핑 규격
+export const dispatchToDomain = (category: 'learning' | 'ai' | 'etc', slug: string) =&gt; &#123;
+  const targetRoute = category === 'learning' ? '/svelte' : category === 'ai' ? '/react' : '/vue';
+  return `$&#123;targetRoute&#125;?slug=$&#123;encodeURIComponent(slug)&#125;`;
+&#125;;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. 실제 적용될 메인 인덱스 카드 (한글 실전 시안) -->
+        <section class="space-y-4">
+            <div class="border-b border-silver-line pb-2 flex justify-between items-center">
+                <h2 class="text-xs font-mono text-silver-muted uppercase tracking-wider">
+                    03. INDEX FEED SPEC (메인 피드 실전 적용)
+                </h2>
+                <span class="text-[10px] font-mono text-silver-muted">호버 시 버티컬 띠지 발광 & 요약문 반전</span>
+            </div>
+
+            <div class="divide-y divide-silver-line border border-silver-line bg-carbon">
+                <!-- 1번 게시물 (Learning) -->
+                <article class="relative p-5 sm:p-6 pl-6 sm:pl-8 group transition cursor-pointer hover:bg-card">
+                    <div
+                        class="absolute left-0 top-3 bottom-3 w-[3px] bg-topic-learning opacity-40 group-hover:opacity-100 group-hover:led-learning transition-all">
+                    </div>
+
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-silver-muted mb-2 gap-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-topic-learning">[01.LEARNING // SVELTE]</span>
+                            <span class="text-silver-line">|</span>
+                            <span class="text-silver-muted">아키텍처 설계</span>
+                        </div>
+                        <span class="text-[11px]">2026.09.08 · 07 MIN READ</span>
+                    </div>
+
+                    <h3 class="text-lg sm:text-xl font-bold text-paper group-hover:text-white transition-colors mb-2.5">
+                        분산 프론트엔드 환경에서 상태 동기화 및 캐시 무효화 전략
+                    </h3>
+
+                    <p class="text-xs sm:text-sm text-silver-muted leading-relaxed">
+                        <span
+                            class="group-hover:bg-paper group-hover:text-carbon px-1.5 py-0.5 box-decoration-clone transition-colors">
+                            단일 웹 애플리케이션 내에서 Svelte, React, Vue 세 개의 런타임 엔진이 메모리 누수 없이 단일
+                            진실 공급원(SSOT)을 유지하는 구체적인 메커니즘을 분석합니다.
+                        </span>
+                    </p>
+                </article>
+
+                <!-- 2번 게시물 (AI) -->
+                <article class="relative p-5 sm:p-6 pl-6 sm:pl-8 group transition cursor-pointer hover:bg-card">
+                    <div
+                        class="absolute left-0 top-3 bottom-3 w-[3px] bg-topic-ai opacity-40 group-hover:opacity-100 group-hover:led-ai transition-all">
+                    </div>
+
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-silver-muted mb-2 gap-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-topic-ai">[02.AI // REACT]</span>
+                            <span class="text-silver-line">|</span>
+                            <span class="text-silver-muted">벡터 토폴로지</span>
+                        </div>
+                        <span class="text-[11px]">2026.09.06 · 12 MIN READ</span>
+                    </div>
+
+                    <h3 class="text-lg sm:text-xl font-bold text-paper group-hover:text-white transition-colors mb-2.5">
+                        자체 학습 그래프 토폴로지 기반 동음이의어 분별 알고리즘 구현
+                    </h3>
+
+                    <p class="text-xs sm:text-sm text-silver-muted leading-relaxed">
+                        <span
+                            class="group-hover:bg-paper group-hover:text-carbon px-1.5 py-0.5 box-decoration-clone transition-colors">
+                            외부 거대언어모델(LLM)에 의존하지 않고 그래프 데이터베이스 상의 노드 군집화 기법을 적용하여
+                            다의어를 벡터 공간에 매핑하는 자율 학습 구조를 구현했습니다.
+                        </span>
+                    </p>
+                </article>
+
+                <!-- 3번 게시물 (ETC) -->
+                <article class="relative p-5 sm:p-6 pl-6 sm:pl-8 group transition cursor-pointer hover:bg-card">
+                    <div
+                        class="absolute left-0 top-3 bottom-3 w-[3px] bg-topic-etc opacity-40 group-hover:opacity-100 group-hover:led-etc transition-all">
+                    </div>
+
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-silver-muted mb-2 gap-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-topic-etc">[03.ETC // VUE]</span>
+                            <span class="text-silver-line">|</span>
+                            <span class="text-silver-muted">바이오 엔지니어링</span>
+                        </div>
+                        <span class="text-[11px]">2026.09.02 · 05 MIN READ</span>
+                    </div>
+
+                    <h3 class="text-lg sm:text-xl font-bold text-paper group-hover:text-white transition-colors mb-2.5">
+                        체외 세포 리프로그래밍 연구 동향 및 기술적 가치 분석
+                    </h3>
+
+                    <p class="text-xs sm:text-sm text-silver-muted leading-relaxed">
+                        <span
+                            class="group-hover:bg-paper group-hover:text-carbon px-1.5 py-0.5 box-decoration-clone transition-colors">
+                            역분화 줄기세포 기반 재생 의학 기술의 최근 연구 동향과 주요 파이프라인의 임상 진척 단계를
+                            분석하고 향후 과제를 점검합니다.
+                        </span>
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- 04. 실제 적용될 도메인 게시판 뷰어 (상세 화면 실전 시안) -->
+        <section class="space-y-4">
+            <div class="border-b border-silver-line pb-2 flex justify-between items-center">
+                <h2 class="text-xs font-mono text-silver-muted uppercase tracking-wider">
+                    04. HUB READER SPEC (/svelte, /react, /vue 실전 화면)
+                </h2>
+                <span class="text-[10px] font-mono text-silver-muted">좌측 색인 목록 + 우측 상세 리더</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 좌측 인덱스 목록 -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center px-1">
+                        <span class="text-[10px] font-mono text-silver-muted uppercase tracking-wider"
+                            >LEARNING ARCHIVE</span
+                        >
+                        <span class="text-[10px] font-mono text-topic-learning font-bold">TOTAL: 02</span>
+                    </div>
+                    <div class="space-y-1">
+                        <button
+                            class="w-full text-left p-3 border border-topic-learning bg-[#14151A] text-paper flex flex-col gap-1 cursor-pointer">
+                            <div class="font-semibold text-xs sm:text-sm">분산 프론트엔드 상태 동기화</div>
+                            <span class="text-[10px] font-mono text-topic-learning">2026.09.08 · READING</span>
+                        </button>
+                        <button
+                            class="w-full text-left p-3 border border-silver-line bg-carbon text-silver-muted hover:border-silver-bright hover:text-paper transition flex flex-col gap-1 cursor-pointer">
+                            <div class="font-medium text-xs sm:text-sm">NAPI-RS를 활용한 Rust 바인딩</div>
+                            <span class="text-[10px] font-mono opacity-60">2026.08.20</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 우측 본문 뷰어 + 이전/다음 네비게이션 -->
+                <div class="md:col-span-2 border border-silver-line bg-carbon p-6 sm:p-8 flex flex-col justify-between">
+                    <article class="space-y-6">
+                        <header class="border-b border-silver-line pb-5">
+                            <div
+                                class="flex items-center gap-2 text-[10px] font-mono text-topic-learning uppercase tracking-wider mb-2">
+                                <span class="w-1.5 h-1.5 bg-topic-learning led-learning"></span>
+                                <span>DISPATCH: ARCHIVE-2026-LEARNING-01</span>
+                            </div>
+                            <h1 class="text-xl sm:text-2xl font-bold text-paper leading-snug">
+                                분산 프론트엔드 환경에서 상태 동기화 및 캐시 무효화 전략
+                            </h1>
+                            <div class="flex items-center gap-3 text-xs font-mono text-silver-muted mt-3">
+                                <span>2026.09.08</span>
+                                <span>·</span>
+                                <span>07 MIN READ</span>
+                            </div>
+                        </header>
+
+                        <div class="text-sm text-silver-bright leading-relaxed space-y-4">
+                            <p>
+                                웹 애플리케이션의 규모가 확장됨에 따라 단일 프레임워크 기반의 모놀리식 구조는 빌드 속도
+                                저하와 복잡도 증가라는 한계에 부딪히게 됩니다.
+                            </p>
+                            <p>
+                                Astro 5 엔진을 호스트로 두고 Svelte, React, Vue 각각의 아일랜드가 독립적인 상태
+                                관리(Store)를 유지하면서도 브라우저 전역 브릿지를 통해 이벤트를 전파하는 실전 구현
+                                방식을 다룹니다.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- 이전/다음 글 카드 -->
+                    <div class="grid grid-cols-2 gap-4 pt-8 mt-12 border-t border-silver-line text-xs font-mono">
+                        <div
+                            class="p-3 border border-silver-line bg-[#14151A] hover:border-silver-bright transition cursor-pointer group">
+                            <span class="text-silver-muted block text-[10px] mb-1 group-hover:text-topic-learning"
+                                >← PREVIOUS</span
+                            >
+                            <span class="text-paper font-sans font-medium line-clamp-1"> 이전 글이 없습니다 </span>
+                        </div>
+                        <div
+                            class="p-3 border border-silver-line bg-[#14151A] hover:border-silver-bright transition cursor-pointer group text-right">
+                            <span class="text-silver-muted block text-[10px] mb-1 group-hover:text-topic-learning"
+                                >NEXT →</span
+                            >
+                            <span class="text-paper font-sans font-medium line-clamp-1">
+                                NAPI-RS를 활용한 Node.js - Rust 연동
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</BaseLayout>

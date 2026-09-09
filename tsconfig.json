@@ -20,6 +20,7 @@
   "include": [
     "src/**/*",
     ".astro/types.d.ts",
-    "config.ts"
+    "config.ts",
+    "scripts/**/*"
   ]
 }

@@ -1,10 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* 한글 Pretendard 가변 웹 폰트 로드 */
+
+
 /* Tailwind v4 디자인 시스템 토큰 정의 */
 @theme {
     --color-carbon: #0E0F12;
     --color-paper: #F4F4F5;
+
+    --color-card: #292c38af;
+    --color-card-hover: #22252E;
 
     --color-silver-line: #2E323B;
     --color-silver-muted: #A1A4B2;
@@ -14,23 +20,70 @@
     --color-topic-ai: #38BDF8;
     --color-topic-etc: #34D399;
 
-    --font-sans: 'Inter', sans-serif;
-    --font-heading: 'Space Grotesk', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    /* 본문: 영문은 Inter -> 한글은 SUIT */
+    --font-sans: 'Inter', 'SUIT Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* 제목/헤더: 영문은 Space Grotesk -> 한글은 SUIT */
+    --font-heading: 'Space Grotesk', 'SUIT Variable', sans-serif;
+
+    /* 코드/로그: 영문은 JetBrains Mono -> 한글은 SUIT */
+    --font-mono: 'JetBrains Mono', 'SUIT Variable', monospace;
+
 }
 
-/* 브라우저 기본 배경 강제 고정 */
+/* 브라우저 기본 배경 강제 고정 및 한글 가독성 최적화 */
 html,
 body {
     background-color: var(--color-carbon) !important;
     color: var(--color-paper) !important;
     margin: 0;
     padding: 0;
+    font-family: var(--font-sans);
+    word-break: keep-all;
+    /* 한글 단어가 중간에 잘리지 않고 어절 단위로 떨어짐 */
+    letter-spacing: -0.02em;
+    /* 한글 특유의 헐거운 자간을 정돈 */
 }
 
 /* 0px 하드웨어 엣지 강제 */
 * {
     border-radius: 0px !important;
+}
+
+/* 실제 마우스 텍스트 드래그(선택) 시 하드웨어 인버전 동기화 */
+::selection {
+    background-color: var(--color-paper) !important;
+    color: var(--color-carbon) !important;
+}
+
+/* 스크롤바 하드웨어 룩 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-carbon);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-silver-line);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-silver-muted);
+}
+
+/* 한글 받침/자음 잘림 없는 인라인 하이라이트 박스 */
+.ko-highlight {
+    display: inline;
+    background-color: var(--color-paper);
+    color: var(--color-carbon);
+    padding: 0.15em 0.35em 0.2em 0.35em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    line-height: 1.8;
+    font-weight: 600;
 }
 
 /* LED 인디케이터 효과 */
@@ -50,6 +103,7 @@ body {
     box-shadow: 0 0 6px #F4F4F5, 0 0 12px rgba(244, 244, 245, 0.4);
 }
 
+/* 텍스트 글로우 */
 .glow-learning {
     text-shadow: 0 0 8px rgba(255, 87, 34, 0.6);
 }

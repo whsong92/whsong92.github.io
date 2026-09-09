@@ -1,11 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import fs from "node:fs";
+import path from "node:path";
 
-const posts = (await getCollection("posts")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+// 빌드 스크립트가 생성한 all.json 활용 (또는 기존 getCollection 유지 시 키 매핑 주의)
+interface PostMeta {
+  slug: string;
+  title: string;
+  date: string;
+  category: "learning" | "ai" | "etc";
+  subject: string;
+  description?: string;
+  readTime?: string;
+}
 
-function formatDate(date: Date) {
-  return date.toISOString().split("T")[0].replace(/-/g, ".");
+const listPath = path.resolve(process.cwd(), "public/data/lists/all.json");
+let posts: PostMeta[] = [];
+
+if (fs.existsSync(listPath)) {
+  posts = JSON.parse(fs.readFileSync(listPath, "utf-8"));
 }
 
 const categoryTheme = {
@@ -25,10 +38,10 @@ const categoryTheme = {
     ledBar: "group-hover:led-ai",
     glowText: "group-hover:glow-ai",
   },
-  misc: {
+  etc: {
     label: "[03 // VUE]",
     route: "/vue",
-    barColor: "bg-topic-misc",
+    barColor: "bg-topic-misc", // 기존 misc 스타일 유지
     textColor: "text-topic-misc",
     ledBar: "group-hover:led-misc",
     glowText: "group-hover:glow-misc",
@@ -37,86 +50,92 @@ const categoryTheme = {
 ---
 
 <BaseLayout>
-  <!-- 히어로 섹션 -->
-  <section class="flex flex-col pt-2">
-    <div class="flex items-center gap-2 text-xs font-mono tracking-widest pb-3 text-silver-muted">
-      <span class="inline-block w-1.5 h-1.5 bg-paper"></span>
-      <span>INDEX // VOL. 04 — PERSONAL LOG</span>
-    </div>
-
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-heading font-bold uppercase text-paper tracking-tighter mb-2">
-      SWH STUDIO
-    </h1>
-
-    <p class="text-silver-muted text-xs sm:text-sm leading-relaxed mb-6 max-w-xl">
-      Notes on reactive architectures, synthetic cognition, and systems design across three isolated runtimes.
-    </p>
-
-    <!-- 채널 네비게이션 -->
-    <nav class="flex items-center flex-wrap gap-2 text-xs font-mono text-silver-muted border-b border-silver-line pb-4">
-      <a class="text-paper font-semibold hover:underline" href="/">[ALL]</a>
-      <span class="text-silver-line">/</span>
-      <a class="hover:text-topic-learning transition-colors" href="/svelte">[01.DEV / SVELTE]</a>
-      <span class="text-silver-line">/</span>
-      <a class="hover:text-topic-ai transition-colors" href="/react">[02.AI / REACT]</a>
-      <span class="text-silver-line">/</span>
-      <a class="hover:text-topic-misc transition-colors" href="/vue">[03.MISC / VUE]</a>
-    </nav>
-  </section>
-
-  <!-- 섹션 헤더: 반응형 60% 비대칭 라인 -->
-  <section id="essays" class="space-y-4">
-    <div class="flex items-center gap-3 sm:gap-4">
-      <div class="w-1 h-6 sm:h-8 bg-paper led-white shrink-0"></div>
-      <div>
-        <span class="text-[10px] font-mono text-silver-muted uppercase tracking-wider block">DISPATCH CATALOG</span>
-        <h2 class="text-lg sm:text-xl md:text-2xl font-heading font-bold text-paper tracking-tight uppercase">
-          SELECTED ESSAYS
-        </h2>
+  <div class="max-w-4xl h-full mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 space-y-12">
+    <!-- 히어로 섹션 -->
+    <section class="flex flex-col pt-2">
+      <div class="flex items-center gap-2 text-xs font-mono tracking-widest pb-3 text-silver-muted">
+        <span class="inline-block w-1.5 h-1.5 bg-paper"></span>
+        <span>INDEX // VOL. 04 — PERSONAL LOG</span>
       </div>
-    </div>
 
-    <div class="w-full flex justify-end">
-      <div class="w-full sm:w-3/5 h-px bg-silver-line"></div>
-    </div>
-  </section>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-heading font-bold uppercase text-paper tracking-tighter mb-2">
+        SWH STUDIO
+      </h1>
 
-  <!-- 글 목록 (반응형 패딩 및 LED 인디케이터) -->
-  <section class="divide-y divide-silver-line border-b border-silver-line">
-    {
-      posts.map((post, index) => {
-        const idx = String(index + 1).padStart(2, "0");
-        const theme = categoryTheme[post.data.category];
+      <p class="text-silver-muted text-xs sm:text-sm leading-relaxed mb-6 max-w-xl">
+        Notes on reactive architectures, synthetic cognition, and systems design across three isolated runtimes.
+      </p>
 
-        return (
-          <article class="relative py-5 sm:py-6 pl-4 sm:pl-5 group transition-all duration-150">
-            <div
-              class={`absolute left-0 top-5 bottom-5 sm:top-6 sm:bottom-6 w-[2px] ${theme.barColor} opacity-40 group-hover:opacity-100 ${theme.ledBar} transition-all duration-200`}
-            />
+      <!-- 채널 네비게이션 -->
+      <nav
+        class="flex items-center flex-wrap gap-2 text-xs font-mono text-silver-muted border-b border-silver-line pb-4">
+        <a class="text-paper font-semibold hover:underline" href="/">[ALL]</a>
+        <span class="text-silver-line">/</span>
+        <a class="hover:text-topic-learning transition-colors" href="/svelte">[01.DEV / SVELTE]</a>
+        <span class="text-silver-line">/</span>
+        <a class="hover:text-topic-ai transition-colors" href="/react">[02.AI / REACT]</a>
+        <span class="text-silver-line">/</span>
+        <a class="hover:text-topic-misc transition-colors" href="/vue">[03.ETC / VUE]</a>
+      </nav>
+    </section>
 
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-silver-muted mb-2 gap-1 sm:gap-0">
-              <div class="flex items-center gap-2.5 sm:gap-3">
-                <span class="font-bold text-paper">{idx}</span>
-                <a
-                  href={theme.route}
-                  class={`font-semibold tracking-wider hover:underline ${theme.textColor} ${theme.glowText} transition-all duration-200`}>
-                  {theme.label} ↗
-                </a>
+    <!-- 섹션 헤더: 반응형 60% 비대칭 라인 -->
+    <section id="essays" class="space-y-4">
+      <div class="flex items-center gap-3 sm:gap-4">
+        <div class="w-1 h-6 sm:h-8 bg-paper led-white shrink-0"></div>
+        <div>
+          <span class="text-[10px] font-mono text-silver-muted uppercase tracking-wider block">DISPATCH CATALOG</span>
+          <h2 class="text-lg sm:text-xl md:text-2xl font-heading font-bold text-paper tracking-tight uppercase">
+            SELECTED ESSAYS
+          </h2>
+        </div>
+      </div>
+
+      <div class="w-full flex justify-end">
+        <div class="w-full sm:w-3/5 h-px bg-silver-line"></div>
+      </div>
+    </section>
+
+    <!-- 글 목록 (반응형 패딩 및 LED 인디케이터) -->
+    <section class="divide-y divide-silver-line border-b border-silver-line">
+      {
+        posts.map((post, index) => {
+          const idx = String(index + 1).padStart(2, "0");
+          const theme = categoryTheme[post.category] || categoryTheme.etc;
+
+          // 각 프레임워크 SPA 허브로 직접 쿼리 전달
+          const postLink = `${theme.route}?slug=${post.slug}`;
+
+          return (
+            <article class="relative py-5 sm:py-6 pl-4 sm:pl-5 group transition-all duration-150">
+              <div
+                class={`absolute left-0 top-5 bottom-5 sm:top-6 sm:bottom-6 w-[2px] ${theme.barColor} opacity-40 group-hover:opacity-100 ${theme.ledBar} transition-all duration-200`}
+              />
+
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-silver-muted mb-2 gap-1 sm:gap-0">
+                <div class="flex items-center gap-2.5 sm:gap-3">
+                  <span class="font-bold text-paper">{idx}</span>
+                  <a
+                    href={theme.route}
+                    class={`font-semibold tracking-wider hover:underline ${theme.textColor} ${theme.glowText} transition-all duration-200`}>
+                    {theme.label} ↗
+                  </a>
+                </div>
+                <span class="text-[11px]">
+                  {post.date} · {post.readTime}
+                </span>
               </div>
-              <span class="text-[11px]">
-                {formatDate(post.data.pubDate)} · {post.data.readTime}
-              </span>
-            </div>
 
-            <a class="block space-y-1.5" href={`/posts/${post.id}`}>
-              <h3 class="text-base sm:text-lg md:text-xl font-heading font-semibold text-paper tracking-tight group-hover:text-white transition-colors">
-                {post.data.title}
-              </h3>
-              <p class="text-xs sm:text-sm text-silver-muted leading-relaxed line-clamp-2">{post.data.description}</p>
-            </a>
-          </article>
-        );
-      })
-    }
-  </section>
+              <a class="block space-y-1.5" href={postLink}>
+                <h3 class="text-base sm:text-lg md:text-xl font-heading font-semibold text-paper tracking-tight group-hover:text-white transition-colors">
+                  {post.title}
+                </h3>
+                <p class="text-xs sm:text-sm text-silver-muted leading-relaxed line-clamp-2">{post.description}</p>
+              </a>
+            </article>
+          );
+        })
+      }
+    </section>
+  </div>
 </BaseLayout>

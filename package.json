@@ -7,6 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "generate:posts": "bun scripts/generate-posts.ts",
+    "prebuild": "bun run generate:posts",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -22,7 +24,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.31.0",
-    "marked": "^18.0.11",
+    "marked": "^18.0.12",
     "pinia": "^4.0.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
@@ -38,7 +40,9 @@
   "devDependencies": {
     "@types/estree": "^1.0.9",
     "@types/marked": "^6.0.0",
+    "@types/node": "^26.5.0",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4"
+    "@types/react-dom": "^19.2.4",
+    "gray-matter": "^4.0.3"
   }
 }

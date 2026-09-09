@@ -1,0 +1,251 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import fs from "node:fs";
+import path from "node:path";
+
+// 1. 샘플 데이터 로드
+const postsDir = path.resolve(process.cwd(), "public/data/posts");
+let samplePost = {
+    slug: "sample-preview",
+    title: "역분화 줄기세포와 체외 리프로그래밍 동향 분석",
+    date: "2026.09.08",
+    category: "etc",
+    subject: "주식 & 바이오",
+    readTime: "07 MIN READ",
+    description: "체외 세포 리프로그래밍 기술의 최근 임상 진척과 파이프라인 지표를 분석합니다.",
+    content: `체외 세포 리프로그래밍은 체세포를 유도만능줄기세포(iPSC) 상태로 되돌리거나, 직접 다른 계통의 세포로 전환(Transdifferentiation)하는 차세대 재생의학 기술입니다.
+
+![세포 분화 형광 현미경 이미지](https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1400&q=80)
+
+초기 야마나카 4대 인자(Oct3/4, Sox2, Klf4, c-Myc) 기반의 바이러스 벡터 전달 방식에서 벗어나, 최근에는 저분자 화합물(Small molecules)을 조합한 화학적 리프로그래밍 방식이 비약적으로 발전했습니다.
+
+위 사진에서 확인할 수 있듯, 14일차 배양 시점에서 표지 단백질의 발현율이 대조군 대비 약 42% 향상되었습니다.`,
+    prevPost: { slug: "sample-prev", title: "웹 기반 3D 볼류메트릭 렌더링 파이프라인" },
+    nextPost: { slug: "sample-next", title: "오펜하이머 — 연쇄반응과 엔지니어의 고뇌" },
+};
+
+if (fs.existsSync(postsDir)) {
+    const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".json"));
+    if (files.length > 0) {
+        samplePost = JSON.parse(fs.readFileSync(path.join(postsDir, files[0]), "utf-8"));
+    }
+}
+
+// 2. 사이드바 트리 데이터 로드
+const listPath = path.resolve(process.cwd(), `public/data/lists/${samplePost.category}.json`);
+let categoryData = {
+    total: 6,
+    bySubject: {
+        "주식 & 바이오": [
+            { slug: samplePost.slug, title: samplePost.title, date: samplePost.date },
+            { slug: "biotech-market-2026", title: "2026 상반기 바이오텍 파이프라인 동향", date: "2026.08.20" },
+        ],
+        "3D 모델링": [{ slug: "webgpu-shaders", title: "WebGPU 환경에서의 볼류메트릭 렌더링", date: "2026.08.15" }],
+        영화감상: [
+            { slug: "oppenheimer-review", title: "오펜하이머 — 연쇄반응과 엔지니어의 고뇌", date: "2026.07.30" },
+        ],
+    },
+};
+
+if (fs.existsSync(listPath)) {
+    categoryData = JSON.parse(fs.readFileSync(listPath, "utf-8"));
+}
+
+// 3. 마크다운 이미지 인라인 치환
+const formattedContent = samplePost.content.replace(
+    /!\[(.*?)\]\((.*?)\)/g,
+    `
+  <figure class="my-6 border border-[#1f242c] bg-[#0c0e12] p-2 rounded text-center">
+    <div class="overflow-hidden rounded bg-[#050608]">
+      <img src="$2" alt="$1" class="w-full max-h-[520px] object-cover block" loading="lazy" />
+    </div>
+    <figcaption class="mt-2 text-[11px] font-mono text-[#8b949e] uppercase tracking-wider flex items-center justify-center gap-1">
+      <span class="text-[#58a6ff] font-bold">// FIG.</span> $1
+    </figcaption>
+  </figure>
+  `,
+);
+---
+
+<BaseLayout title={`[UI 시안] ${samplePost.title}`}>
+    <!-- 전체 뷰포트를 채우도록 부모의 폭 제약을 해제하는 래퍼 -->
+    <div class="w-full max-w-none flex flex-col bg-[#090a0f] text-[#c9d1d9] font-sans border-x border-[#1f242c]">
+        <!-- Top System Sub-Header (반응형 래핑) -->
+        <div
+            class="border-b border-[#1f242c] bg-[#0b0c12] px-4 py-2.5 flex flex-wrap items-center justify-between font-mono text-xs text-[#8b949e] gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-[#2ea043]"></span>
+                <span class="text-[#f0f6fc] font-bold tracking-wider uppercase"
+                    >HUB_{samplePost.category.toUpperCase()}</span
+                >
+                <span class="text-[#30363d]">/</span>
+                <span class="text-[#58a6ff]">#{samplePost.subject}</span>
+            </div>
+
+            <div class="flex items-center gap-4 text-[11px]">
+                <span class="hidden sm:inline text-[#7ee787]">MOCK_SESSION: ACTIVE</span>
+                <span>READ_EST: {samplePost.readTime || "05 MIN"}</span>
+            </div>
+        </div>
+
+        <!-- 모바일 전용 인덱스 토글 아코디언 (lg 미만 화면) -->
+        <details class="lg:hidden border-b border-[#1f242c] bg-[#0e1017] text-xs font-mono group">
+            <summary
+                class="px-4 py-3 cursor-pointer list-none flex items-center justify-between text-[#8b949e] hover:text-[#c9d1d9]">
+                <span class="flex items-center gap-2 font-bold text-[#58a6ff]">
+                    <span>📁</span> SUBJECT DIRECTORY ({categoryData.total || 0})
+                </span>
+                <span class="text-[10px] text-[#484f58] group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+
+            <div class="p-4 border-t border-[#1f242c] space-y-3 bg-[#0a0c10]">
+                {
+                    Object.entries(categoryData.bySubject || {}).map(([subject, items]: [string, any]) => (
+                        <div class="space-y-1">
+                            <div class="text-[11px] font-bold text-[#e6edf3] flex items-center gap-1">
+                                <span class="text-[#58a6ff]">#</span> {subject}
+                            </div>
+                            <ul class="pl-2 space-y-1">
+                                {items.map((item: any) => (
+                                    <li>
+                                        <button
+                                            type="button"
+                                            class="w-full text-left py-1 text-xs text-[#8b949e] hover:text-[#58a6ff] truncate">
+                                            {item.slug === samplePost.slug ? `▸ ${item.title}` : item.title}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                }
+            </div>
+        </details>
+
+        <!-- Main Workspace (PC: 2패널 가로 분할 / 모바일: 본문 1열 스택) -->
+        <div class="flex w-full min-h-[calc(100vh-8rem)]">
+            <!-- Left: Subject Hierarchy Sidebar (PC 전용, 너비 64 고정 및 축소 방지) -->
+            <aside class="hidden lg:flex w-64 border-r border-[#1f242c] bg-[#0a0c10] flex-col justify-between shrink-0">
+                <div class="p-4 space-y-5">
+                    <div
+                        class="flex items-center justify-between px-1 text-[11px] font-mono text-[#6e7681] uppercase tracking-wider">
+                        <span>Subject Tree</span>
+                        <span>Total: {categoryData.total || 0}</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        {
+                            Object.entries(categoryData.bySubject || {}).map(([subject, items]: [string, any]) => (
+                                <div class="space-y-1">
+                                    <div class="flex items-center justify-between px-2 py-1 text-xs font-mono text-[#8b949e] bg-[#11141b]/60 border-l border-[#30363d]">
+                                        <span class="font-bold flex items-center gap-1 text-[#e6edf3]">
+                                            <span class="text-[#58a6ff]">//</span> {subject}
+                                        </span>
+                                        <span class="text-[10px] text-[#6e7681]">({items.length})</span>
+                                    </div>
+
+                                    <ul class="space-y-0.5 pt-1 pl-1">
+                                        {items.map((item: any) => {
+                                            const isSelected = item.slug === samplePost.slug;
+                                            return (
+                                                <li>
+                                                    <button
+                                                        type="button"
+                                                        class:list={[
+                                                            "w-full text-left px-2 py-1.5 text-xs rounded transition truncate font-mono block",
+                                                            isSelected
+                                                                ? "bg-[#161b22] text-[#58a6ff] font-medium border border-[#1f242c]"
+                                                                : "text-[#8b949e] hover:bg-[#11141a] hover:text-[#c9d1d9]",
+                                                        ]}>
+                                                        {isSelected && <span class="mr-1 text-[#58a6ff]">▸</span>}
+                                                        {item.title}
+                                                    </button>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <div class="p-3 border-t border-[#1f242c] bg-[#090a0f] text-[10px] font-mono text-[#484f58]">
+                    PIPELINE: SPA_INDEX_LOADED
+                </div>
+            </aside>
+
+            <!-- Right: Reading Viewport (가로 폭 여유 확보) -->
+            <main class="flex-1 w-full bg-[#07080b] p-4 sm:p-8 lg:p-10">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Breadcrumb -->
+                    <div class="flex items-center gap-1.5 font-mono text-xs text-[#6e7681] mb-4">
+                        <span>INDEX</span>
+                        <span>&gt;</span>
+                        <span class="text-[#8b949e] uppercase">{samplePost.category}</span>
+                        <span>&gt;</span>
+                        <span class="text-[#58a6ff]">{samplePost.subject}</span>
+                    </div>
+
+                    <!-- Document Header -->
+                    <header class="border-b border-[#1f242c] pb-6 mb-8">
+                        <h1 class="text-2xl sm:text-3xl font-bold text-[#f0f6fc] tracking-tight leading-snug mb-3">
+                            {samplePost.title}
+                        </h1>
+
+                        <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-[#6e7681]">
+                            <time datetime={samplePost.date}>DATE: {samplePost.date}</time>
+                            <span>•</span>
+                            <span>READ: {samplePost.readTime}</span>
+                            <span>•</span>
+                            <span class="text-[#2ea043]">STATUS: VERIFIED</span>
+                        </div>
+
+                        {
+                            samplePost.description && (
+                                <p class="mt-4 text-sm text-[#8b949e] bg-[#0e1117] p-3.5 border-l-2 border-[#58a6ff] rounded-r leading-relaxed">
+                                    {samplePost.description}
+                                </p>
+                            )
+                        }
+                    </header>
+
+                    <!-- Content Area -->
+                    <div
+                        class="text-[#c9d1d9] text-[15px] sm:text-base leading-relaxed whitespace-pre-line font-sans space-y-4">
+                        <Fragment set:html={formattedContent} />
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <footer
+                        class="mt-14 pt-6 border-t border-[#1f242c] grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
+                        <div>
+                            {
+                                samplePost.prevPost && (
+                                    <div class="p-3 bg-[#0d0f14] border border-[#1f242c] rounded">
+                                        <span class="text-[#6e7681] block mb-1">← PREV_DISPATCH</span>
+                                        <span class="text-[#c9d1d9] font-sans font-medium line-clamp-1">
+                                            {samplePost.prevPost.title}
+                                        </span>
+                                    </div>
+                                )
+                            }
+                        </div>
+                        <div class="text-left sm:text-right">
+                            {
+                                samplePost.nextPost && (
+                                    <div class="p-3 bg-[#0d0f14] border border-[#1f242c] rounded">
+                                        <span class="text-[#6e7681] block mb-1">NEXT_DISPATCH →</span>
+                                        <span class="text-[#c9d1d9] font-sans font-medium line-clamp-1">
+                                            {samplePost.nextPost.title}
+                                        </span>
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </footer>
+                </div>
+            </main>
+        </div>
+    </div>
+</BaseLayout>
