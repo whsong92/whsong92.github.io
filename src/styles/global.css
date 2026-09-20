@@ -115,3 +115,24 @@ body {
 .glow-etc {
     text-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
 }
+
+
+.star-rating {
+    position: relative;
+    display: inline-block;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: #e5e7eb;
+    /* 비어있는 별 색상 (회색) */
+    user-select: none;
+}
+
+.star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #f59e0b;
+    /* 채워진 별 색상 (노란색/호박색) */
+}

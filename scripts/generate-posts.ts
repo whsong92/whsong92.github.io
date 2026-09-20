@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { marked } from "marked";
 
 const POSTS_DIR = path.resolve(process.cwd(), "src/content/posts");
 const OUTPUT_DIR = path.resolve(process.cwd(), "public/data");
@@ -18,6 +19,8 @@ export interface PostMeta {
     subject: string;
     subjectId: string;
     description?: string;
+    rating?: number | null;
+    cover?: string | null; // 👈 1. cover 메타데이터 타입 추가
 }
 
 export interface CategoryPayload {
@@ -54,12 +57,12 @@ async function generatePosts() {
         const { data, content } = matter(rawContent);
         const slug = filename.replace(/\.md$/, "");
 
-        // 파일 생성 시간(birthtimeMs), OS에 따라 미지원 시 mtimeMs로 fallback
         const fileCreatedAt = fileStat.birthtimeMs > 0 ? fileStat.birthtimeMs : fileStat.mtimeMs;
-
-        // frontmatter의 date가 유효하면 타임스탬프로, 없으면 파일 생성 시간 기준
         const rawDate = data.date ? new Date(data.date).getTime() : fileCreatedAt;
         const formattedDate = data.date ? String(data.date) : new Date(fileCreatedAt).toISOString().slice(0, 10);
+
+        // 마크다운을 HTML로 파싱 (marked 동기 호출)
+        const parsedContent = (marked.parse(content.trim()) as string) || "";
 
         allPosts.push({
             slug,
@@ -68,10 +71,12 @@ async function generatePosts() {
             category,
             subject: data.subject || defaultSubject.toUpperCase(),
             subjectId: defaultSubject.toLowerCase(),
-            description: data.description || "",
+            description: data.description || data.summary || "",
+            rating: data.rating !== undefined ? Number(data.rating) : null,
+            cover: data.cover ? String(data.cover).trim() : null, // 👈 2. frontmatter에서 cover 추출
             rawDate: isNaN(rawDate) ? fileCreatedAt : rawDate,
             fileCreatedAt,
-            content: content.trim(),
+            content: parsedContent,
         });
     }
 
@@ -87,7 +92,6 @@ async function generatePosts() {
 
         for (const entry of entries) {
             if (entry.isDirectory()) {
-                // category/subject/*.md 구조
                 const subjectDirName = entry.name;
                 const subjectPath = path.join(catDir, subjectDirName);
                 const mdFiles = fs.readdirSync(subjectPath).filter((f) => f.endsWith(".md"));
@@ -97,21 +101,16 @@ async function generatePosts() {
                     processFile(filePath, cat, subjectDirName, filename);
                 }
             } else if (entry.isFile() && entry.name.endsWith(".md")) {
-                // category/*.md fallback 구조
                 const filePath = path.join(catDir, entry.name);
                 processFile(filePath, cat, "General", entry.name);
             }
         }
     }
 
-    // 2. 다단계 정렬: 1차 Frontmatter 날짜 -> 2차 파일 생성 시간 -> 3차 slug
+    // 2. 다단계 정렬 (Frontmatter 날짜 -> 파일 생성일 -> slug)
     allPosts.sort((a, b) => {
-        if (b.rawDate !== a.rawDate) {
-            return b.rawDate - a.rawDate;
-        }
-        if (b.fileCreatedAt !== a.fileCreatedAt) {
-            return b.fileCreatedAt - a.fileCreatedAt;
-        }
+        if (b.rawDate !== a.rawDate) return b.rawDate - a.rawDate;
+        if (b.fileCreatedAt !== a.fileCreatedAt) return b.fileCreatedAt - a.fileCreatedAt;
         return b.slug.localeCompare(a.slug);
     });
 
@@ -122,12 +121,18 @@ async function generatePosts() {
         etc: { category: "etc", total: 0, bySubject: {}, posts: [] },
     };
 
+    const categorizedRawPosts: Record<Category, RawPostItem[]> = {
+        learning: [],
+        ai: [],
+        etc: [],
+    };
     const allMetaList: PostMeta[] = [];
 
     for (const post of allPosts) {
         const { rawDate, fileCreatedAt, content, ...meta } = post;
         allMetaList.push(meta);
 
+        categorizedRawPosts[meta.category].push(post);
         const catTarget = payloads[meta.category];
         catTarget.total += 1;
         catTarget.posts.push(meta);
@@ -138,35 +143,37 @@ async function generatePosts() {
         catTarget.bySubject[meta.subject].push(meta);
     }
 
-    // 4. JSON 파일 쓰기 (all.json 및 3종 카테고리)
+    // 4. JSON 파일 쓰기
     fs.writeFileSync(path.join(LISTS_DIR, "all.json"), JSON.stringify(allMetaList, null, 2), "utf-8");
     CATEGORIES.forEach((cat) => {
         fs.writeFileSync(path.join(LISTS_DIR, `${cat}.json`), JSON.stringify(payloads[cat], null, 2), "utf-8");
     });
 
-    // 5. 개별 포스트 On-demand payload 생성 (카테고리 내 이전글/다음글 연동)
-    allPosts.forEach((post) => {
-        const sameCatPosts = allPosts.filter((p) => p.category === post.category);
-        const idx = sameCatPosts.findIndex((p) => p.slug === post.slug);
+    // 5. 개별 포스트 payload 생성 (카테고리 내 이전글/다음글 연동)
+    for (const cat of CATEGORIES) {
+        const catList = categorizedRawPosts[cat];
+        catList.forEach((post, idx) => {
+            const prevPost = catList[idx + 1] ? { slug: catList[idx + 1].slug, title: catList[idx + 1].title } : null;
+            const nextPost = catList[idx - 1] ? { slug: catList[idx - 1].slug, title: catList[idx - 1].title } : null;
 
-        const prevPost = sameCatPosts[idx + 1] ? { slug: sameCatPosts[idx + 1].slug, title: sameCatPosts[idx + 1].title } : null;
-        const nextPost = sameCatPosts[idx - 1] ? { slug: sameCatPosts[idx - 1].slug, title: sameCatPosts[idx - 1].title } : null;
+            const detail: PostDetail = {
+                slug: post.slug,
+                title: post.title,
+                date: post.date,
+                category: post.category,
+                subject: post.subject,
+                subjectId: post.subjectId,
+                description: post.description,
+                rating: post.rating,
+                cover: post.cover, // 👈 3. 개별 포스트 JSON에도 cover 전달
+                content: post.content,
+                prevPost,
+                nextPost,
+            };
 
-        const detail: PostDetail = {
-            slug: post.slug,
-            title: post.title,
-            date: post.date,
-            category: post.category,
-            subject: post.subject,
-            subjectId: post.subjectId,
-            description: post.description,
-            content: post.content,
-            prevPost,
-            nextPost,
-        };
-
-        fs.writeFileSync(path.join(POSTS_OUTPUT_DIR, `${post.slug}.json`), JSON.stringify(detail, null, 2), "utf-8");
-    });
+            fs.writeFileSync(path.join(POSTS_OUTPUT_DIR, `${post.slug}.json`), JSON.stringify(detail, null, 2), "utf-8");
+        });
+    }
 
     console.log(`✅ [GENERATE-POSTS] Successfully built index lists and ${allPosts.length} post payloads.`);
 }

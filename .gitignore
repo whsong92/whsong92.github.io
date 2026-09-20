@@ -24,3 +24,6 @@ public/data/
 
 # jetbrains setting folder
 .idea/
+
+
+bun.lock

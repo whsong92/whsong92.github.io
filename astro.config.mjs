@@ -4,6 +4,10 @@ import react from '@astrojs/react';
 import vue from '@astrojs/vue';
 import svelte from '@astrojs/svelte';
 import tailwindcss from '@tailwindcss/vite';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url)); // 👈 추가
 
 // 실행 환경 구분
 const isProd = process.env.NODE_ENV === 'production';
@@ -32,5 +36,10 @@ export default defineConfig({
         })],
     vite: {
         plugins: [tailwindcss()],
+        resolve: {
+            alias: {
+                '@': path.resolve(__dirname, './src')
+            }
+        }
     },
 });
